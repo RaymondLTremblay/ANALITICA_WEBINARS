@@ -22,12 +22,6 @@ navbar:
         - 
           href: Ecuaciones_Estructurales.html
           text: 'Ecuaciones Estructurales'
-        -
-          href: Parity.html
-          text: 'Karn Penrose Parity'
-        -
-          href: Birth_Weight.html
-          text: 'Karn Penrose Gestation Time'
       text: "Estadistica y Modelos"
   title: "ANALITICA Fundación Webinars"
 output_dir: "."
