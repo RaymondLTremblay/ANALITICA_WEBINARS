@@ -33,6 +33,7 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -207,6 +208,9 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
 
 
 
@@ -337,6 +341,14 @@ div.tocify {
 
 <div id="header">
 
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
 
 
 <h1 class="title toc-ignore">Vintage Data</h1>
@@ -370,9 +382,6 @@ div.tocify {
 <div id="vintage-data-set" class="section level1">
 <h1>Vintage Data Set:</h1>
 <p>List of Data articles where data set were extracted. - Acccess to the papers are available by selecting the title</p>
-<ol style="list-style-type: decimal">
-<li><a href="Articles/KARN_et_al-1951-Annals_of_Eugenics.pdf">Birth Weight and Gestation Time in relation to Maternal Age, Parity and Infant Survival</a>.</li>
-</ol>
 <p>This data set pubished in <strong>Annals of Eugenics</strong> in 1951, has data on the birth of 7037 males and 6693 females. The manuscript is from Mary N Karn and L. S. Penrose from Galton Laboratory.<br />
 - Karn, M. N., &amp; Penrose, L. S. (1951). Birth weight and gestation time in relation to maternal age, parity and infant survival. Annals of eugenics, 16(1), 147-164.</p>
 </div>
@@ -412,6 +421,11 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
 
 <script>
 $(document).ready(function ()  {

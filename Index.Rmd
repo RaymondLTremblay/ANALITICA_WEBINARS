@@ -8,6 +8,7 @@ output:
 #  theme: simplex   To have the TOC in Red
     toc: yes
     toc_float: yes
+    code_folding: hide
 ---
 
 
@@ -50,7 +51,7 @@ It is our hope that these data can used in Statistical and Data Science explorat
 List of Data articles where data set were extracted.
   - Acccess to the papers are available by selecting the title
 
-1. [Birth Weight and Gestation Time in relation to Maternal Age, Parity and Infant Survival](Articles/KARN_et_al-1951-Annals_of_Eugenics.pdf).
+
 
 This data set pubished in **Annals of Eugenics** in 1951, has data on the birth of 7037 males and 6693 females.  The manuscript is from Mary N Karn and L. S. Penrose from Galton Laboratory.  
  - Karn, M. N., & Penrose, L. S. (1951). Birth weight and gestation time in relation to maternal age, parity and infant survival. Annals of eugenics, 16(1), 147-164.

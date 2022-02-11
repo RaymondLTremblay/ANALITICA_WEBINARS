@@ -1,6 +1,5 @@
 ---
 title: "Organized"
-author: "Axel Leon"
 date: "9/15/2021"
 output:
   html_document:
@@ -17,10 +16,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r echo=FALSE}
 
-Sys.Date()
-```
 
 ***
 
