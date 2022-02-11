@@ -12,22 +12,12 @@ output:
 ---
 
 
-```{r, eval=TRUE, echo=FALSE}
-colorize <- function(x, color) {
-  if (knitr::is_latex_output()) {
-    sprintf("\\textcolor{%s}{%s}", color, x)
-  } else if (knitr::is_html_output()) {
-    sprintf("<span style='color: %s;'>%s</span>", color, 
-      x)
-  } else x
-}
 
-#`r colorize("some words in red", "red")`
-```
 
 ***
 
 # Analítica Fundación
+
 ## Quiénes Somos
 
 **Analítica Fundación, Inc.**, es una corporación sin fines de lucro incorporada bajo las leyes del Estado Libre Asociado de Puerto Rico en el 2018.  Su especialidad es el análisis de datos.  Su objetivo principal es proveer todo tipo de servicios educativos, de investigación y capacitación profesional, y el desarrollo de pensamiento crítico en el campo de la analítica.
@@ -75,7 +65,7 @@ colorize <- function(x, color) {
 ## Recursos
 
 
-## `r colorize("**Gráficas Verstátiles con ggplot2: Análisis Visual de Datos**", "blue")`
+## **Gráficas Verstátiles con ggplot2: Análisis Visual de Datos**
  
 Este libro es sobre la visualización y producción efectiva de gráficos. El énfasis es en el paquete de ggplot2, que está basado en el lenguaje de programación R. Contiene una enorme variedad de representaciones de datos con más de 200 ejemplos. 
 
