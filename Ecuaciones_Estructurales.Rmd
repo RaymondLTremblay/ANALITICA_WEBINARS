@@ -1,0 +1,53 @@
+---
+title: "Ecuaciones Estructurales"
+output:
+  html_document:
+    css: ANALITICA_WEB.css
+    fig_caption: yes
+    highlight: pygments
+#  theme: simplex   To have the TOC in Red
+    toc: yes
+    toc_float: yes
+    code_folding: hide
+---
+
+***
+
+# Introducción a Ecuaciones Estructurales
+
+- Dia del Taller: el 10 de febrero, 2022
+- Recurso: Dr. Ernesto Rosario-Hernández
+- Asociación Académida: **Ponce Health Science University**
+- Correo ellectornico: erosario@psm.edu
+
+
+
+
+
+***
+
+## ¿Qué es Ecuaciones Estructurales?
+
+ > El modelamiento de ecuaciones estructurales es una combinación de técnicas multivariadas entre las que se incluyen la regresión y el análisis de factores. Tiende a tener un enfoque confirmatorio, aunque también puede tomar un enfoque exploratorio. Tiene la ventaja de que puede trabajar con múltiples variables independientes y dependientes de forma simultánea, y toma en consideración el error de medición en sus estimados. También puede trabajar tanto con variables observadas como con variables latentes.
+
+
+***
+
+## Presentación 
+
+La presentación esta disponible en Power Point en el siguiente enlace [Ecuaciones Estructurales](Presentaciones/Introduccion_SEM_Ernesto_Rosario.pptx).
+
+***
+
+## Video de la Presentación
+
+Vea el siguiente enlace para ver el video en el canal de Youtube de ANALITICA Fundación. 
+
+
+***
+
+## Recursos Suplementario
+
+Para más información sobre Ecuaciones Estructurales vea el siguiente enlace
+
+[Gaskination](http://statwiki.gaskination.com/index.php?title=Main_Page)

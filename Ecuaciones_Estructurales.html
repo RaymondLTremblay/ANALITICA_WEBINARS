@@ -11,7 +11,7 @@
 
 
 
-<title>Descripción</title>
+<title>Ecuaciones Estructurales</title>
 
 <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -33,6 +33,7 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -207,6 +208,9 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
 
 
 
@@ -361,17 +365,53 @@ div.tocify {
 
 <div id="header">
 
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
 
 
-<h1 class="title toc-ignore">Descripción</h1>
+
+<h1 class="title toc-ignore">Ecuaciones Estructurales</h1>
 
 </div>
 
 
-<p>Fecha de la ultima revisión</p>
-<pre><code>## [1] &quot;2022-02-11&quot;</code></pre>
-<div id="objective" class="section level2">
-<h2>Objective</h2>
+<hr />
+<div id="introducción-a-ecuaciones-estructurales" class="section level1">
+<h1>Introducción a Ecuaciones Estructurales</h1>
+<ul>
+<li>Dia del Taller: el 10 de febrero, 2022</li>
+<li>Recurso: Dr. Ernesto Rosario-Hernández</li>
+<li>Asociación Académida: <strong>Ponce Health Science University</strong></li>
+<li>Correo ellectornico: <a href="mailto:erosario@psm.edu" class="email">erosario@psm.edu</a></li>
+</ul>
+<hr />
+<div id="qué-es-ecuaciones-estructurales" class="section level2">
+<h2>¿Qué es Ecuaciones Estructurales?</h2>
+<blockquote>
+<p>El modelamiento de ecuaciones estructurales es una combinación de técnicas multivariadas entre las que se incluyen la regresión y el análisis de factores. Tiende a tener un enfoque confirmatorio, aunque también puede tomar un enfoque exploratorio. Tiene la ventaja de que puede trabajar con múltiples variables independientes y dependientes de forma simultánea, y toma en consideración el error de medición en sus estimados. También puede trabajar tanto con variables observadas como con variables latentes.</p>
+</blockquote>
+<hr />
+</div>
+<div id="presentación" class="section level2">
+<h2>Presentación</h2>
+<p>La presentación esta disponible en Power Point en el siguiente enlace <a href="Presentaciones/Introduccion_SEM_Ernesto_Rosario.pptx">Ecuaciones Estructurales</a>.</p>
+<hr />
+</div>
+<div id="video-de-la-presentación" class="section level2">
+<h2>Video de la Presentación</h2>
+<p>Vea el siguiente enlace para ver el video en el canal de Youtube de ANALITICA Fundación.</p>
+<hr />
+</div>
+<div id="recursos-suplementario" class="section level2">
+<h2>Recursos Suplementario</h2>
+<p>Para más información sobre Ecuaciones Estructurales vea el siguiente enlace</p>
+<p><a href="http://statwiki.gaskination.com/index.php?title=Main_Page">Gaskination</a></p>
+</div>
 </div>
 
 
@@ -409,6 +449,11 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
 
 <script>
 $(document).ready(function ()  {

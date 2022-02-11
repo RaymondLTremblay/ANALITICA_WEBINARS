@@ -8,14 +8,26 @@ navbar:
     - 
       menu: 
         - 
-          href: Organized_Data.html
-          text: 'Karn Penrose Mothers Age'
+          href: RMarkdown.html
+          text: 'Introducción a RMarkdown'
+      text: "RStudio"
+    -  
+      menu:
+        - 
+          href: Python.html
+          text: 'Introducción a Python'
+      text: "Python"
+    - 
+      menu: 
+        - 
+          href: Ecuaciones Estructurales.html
+          text: 'Ecuaciones Estructurales'
         -
           href: Parity.html
           text: 'Karn Penrose Parity'
         -
           href: Birth_Weight.html
           text: 'Karn Penrose Gestation Time'
-      text: "Los datos"
-  title: "Vintage Data"
+      text: "Estadistica y Modelos"
+  title: "ANALITICA Fundación Webinars"
 output_dir: "."
