@@ -20,7 +20,7 @@ navbar:
     - 
       menu: 
         - 
-          href: Ecuaciones Estructurales.html
+          href: Ecuaciones_Estructurales.html
           text: 'Ecuaciones Estructurales'
         -
           href: Parity.html
