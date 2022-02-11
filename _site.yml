@@ -1,43 +1,21 @@
 --- 
-name: "ANALITICA Fundación"
+name: BIOL4026
 navbar: 
   left: 
     - 
-      menu: 
-        - 
-          href: Introduccion.html
-          text: "¿Qué es Analitica?"
-        - 
-          href: Paginas_de_Analitica.html
-          text: "Enclaces a otras paginas de ANALITICA"
-        
-      text: "Introducción"
+      href: Descripcion.html
+      text: Home
     - 
       menu: 
         - 
-          href: Tema_del_Webinar.html
-          text: "Webinar_1"
-        - 
-          href: G2-Errores-tipicos-en-la-visualizacion.html
-          text: "Errores típicos en la visualización"
-
-      text: R
-    - 
-      menu: 
-        - 
-          href: Python
-          text: "Una breve introducción a Python"
-        - 
-          href: Documento_dplyr
-          text: "Una breve introducción a dplyr"
-      text: Python
-    - 
-      menu: 
-        - 
-          href: Ecuaciones_Estructurales.html
-          text: "Ecuaciones Estructurales"
-
-      text: "Estadística y Modelos"
-
-  title: ANALITICA Fundación Webinars
+          href: Organized_Data.html
+          text: 'Karn Penrose Mothers Age'
+        -
+          href: Parity.html
+          text: 'Karn Penrose Parity'
+        -
+          href: Birth_Weight.html
+          text: 'Karn Penrose Gestation Time'
+      text: "Los datos"
+  title: "Vintage Data"
 output_dir: "."

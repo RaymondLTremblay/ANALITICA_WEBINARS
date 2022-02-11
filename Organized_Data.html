@@ -34,6 +34,7 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -118,6 +119,15 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 
+.sourceCode .row {
+  width: 100%;
+}
+.sourceCode {
+  overflow-x: auto;
+}
+.code-folding-btn {
+  margin-right: -30px;
+}
 </style>
 <script>
 // apply pandoc div.sourceCode style to pre.sourceCode instead
@@ -303,6 +313,9 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
 
 
 
@@ -398,64 +411,28 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">ANALITICA Fundación Webinars</a>
+      <a class="navbar-brand" href="index.html">Vintage Data</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Introducción
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="Introduccion.html">¿Qué es Analitica?</a>
-    </li>
-    <li>
-      <a href="Paginas_de_Analitica.html">Enclaces a otras paginas de ANALITICA</a>
-    </li>
-  </ul>
+        <li>
+  <a href="Descripcion.html">Home</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    R
+    Los datos
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="Tema_del_Webinar.html">Webinar_1</a>
+      <a href="Organized_Data.html">Karn Penrose Mothers Age</a>
     </li>
     <li>
-      <a href="G2-Errores-tipicos-en-la-visualizacion.html">Errores típicos en la visualización</a>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Python
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="Python">Una breve introducción a Python</a>
+      <a href="Parity.html">Karn Penrose Parity</a>
     </li>
     <li>
-      <a href="Documento_dplyr">Una breve introducción a dplyr</a>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Estadística y Modelos
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="Ecuaciones_Estructurales.html">Ecuaciones Estructurales</a>
+      <a href="Birth_Weight.html">Karn Penrose Gestation Time</a>
     </li>
   </ul>
 </li>
@@ -469,6 +446,14 @@ div.tocify {
 
 <div id="header">
 
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
 
 
 <h1 class="title toc-ignore">Organized</h1>
@@ -479,11 +464,244 @@ div.tocify {
 
 
 <pre><code>## [1] &quot;2022-02-11&quot;</code></pre>
+<hr />
+<div id="objective" class="section level2">
+<h2>Objective</h2>
+<p>This Rmd is to learn how to format the data prior to analyses. The data are collected form the Karn and Penrose, in the same structure they present in the paper, for analysis they needed to be wrangled for effective analysis in R and RStudio.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape)</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span></code></pre></div>
+<hr />
+<p>A small replicable data set</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mini<span class="ot">=</span><span class="fu">tribble</span>( <span class="sc">~</span>mother_age,<span class="sc">~</span>non_survivors,<span class="sc">~</span>total_birth,<span class="sc">~</span>birth_weight,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dv">14</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">3.5</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="dv">16</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">4</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="dv">17</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">4.5</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="dv">18</span>,<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">5</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="dv">19</span>,<span class="dv">0</span>,<span class="dv">4</span>,<span class="dv">6</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="dv">20</span>,<span class="dv">0</span>,<span class="dv">5</span>,<span class="fl">6.5</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="dv">22</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="dv">25</span>,<span class="dv">4</span>,<span class="dv">10</span>,<span class="fl">7.5</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>mini</span></code></pre></div>
+<pre><code>## # A tibble: 8 × 4
+##   mother_age non_survivors total_birth birth_weight
+##        &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;
+## 1         14             0           1          3.5
+## 2         16             1           1          4  
+## 3         17             0           1          4.5
+## 4         18             0           2          5  
+## 5         19             0           4          6  
+## 6         20             0           5          6.5
+## 7         22             3           5          7  
+## 8         25             4          10          7.5</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(mini<span class="sc">$</span>total_birth<span class="sc">-</span> mini<span class="sc">$</span>non_survivors)</span></code></pre></div>
+<pre><code>## [1] 21</code></pre>
+<hr />
+<p>Create a data frame for all death <strong>0</strong> and surviving babies <strong>1</strong>.</p>
+<ul>
+<li>Calculate the number of survivors</li>
+<li>Assign to a new column the code of <strong>0</strong> for all dead babies</li>
+<li>Assign to a new column the code of <strong>0</strong> for a=ll babies alive</li>
+<li>Untable (expand) the data set the number of times each conditions are present
+<ul>
+<li>mother’s age</li>
+<li>birth weight</li>
+</ul></li>
+<li>bind both data frames in one</li>
+<li>arrange (sort) by age of mother or weight (your preference)</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df<span class="ot">=</span><span class="fu">as.data.frame</span>(mini)<span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">survivors =</span> total_birth <span class="sc">-</span> non_survivors)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div>
+<pre><code>##   mother_age non_survivors total_birth birth_weight survivors
+## 1         14             0           1          3.5         1
+## 2         16             1           1          4.0         0
+## 3         17             0           1          4.5         1
+## 4         18             0           2          5.0         2
+## 5         19             0           4          6.0         4
+## 6         20             0           5          6.5         5
+## 7         22             3           5          7.0         2
+## 8         25             4          10          7.5         6</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(df<span class="sc">$</span>total_birth)</span></code></pre></div>
+<pre><code>## [1] 29</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="do">## untable non-survivors</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>df1<span class="ot">&lt;-</span> <span class="fu">untable</span>(df[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">5</span>)], <span class="at">num =</span> df[,<span class="st">&quot;non_survivors&quot;</span>])<span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(non_survivors <span class="sc">&gt;</span><span class="dv">0</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Alive_Dead =</span> <span class="fu">ifelse</span>(non_survivors <span class="sc">&gt;</span><span class="dv">0</span>,<span class="dv">0</span>, <span class="cn">NA</span>))</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>df1</span></code></pre></div>
+<pre><code>##     mother_age non_survivors birth_weight survivors Alive_Dead
+## 2           16             1          4.0         0          0
+## 7           22             3          7.0         2          0
+## 7.1         22             3          7.0         2          0
+## 7.2         22             3          7.0         2          0
+## 8           25             4          7.5         6          0
+## 8.1         25             4          7.5         6          0
+## 8.2         25             4          7.5         6          0
+## 8.3         25             4          7.5         6          0</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="do">## untable survivors</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>df2<span class="ot">&lt;-</span> <span class="fu">untable</span>(df[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">4</span>)], <span class="at">num =</span> df[,<span class="st">&quot;survivors&quot;</span>])<span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(survivors <span class="sc">&gt;</span><span class="dv">0</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Alive_Dead =</span> <span class="fu">ifelse</span>(survivors <span class="sc">&gt;</span><span class="dv">0</span>, <span class="dv">1</span>, <span class="cn">NA</span>))</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>df2</span></code></pre></div>
+<pre><code>##     mother_age non_survivors survivors birth_weight Alive_Dead
+## 1           14             0         1          3.5          1
+## 3           17             0         1          4.5          1
+## 4           18             0         2          5.0          1
+## 4.1         18             0         2          5.0          1
+## 5           19             0         4          6.0          1
+## 5.1         19             0         4          6.0          1
+## 5.2         19             0         4          6.0          1
+## 5.3         19             0         4          6.0          1
+## 6           20             0         5          6.5          1
+## 6.1         20             0         5          6.5          1
+## 6.2         20             0         5          6.5          1
+## 6.3         20             0         5          6.5          1
+## 6.4         20             0         5          6.5          1
+## 7           22             3         2          7.0          1
+## 7.1         22             3         2          7.0          1
+## 8           25             4         6          7.5          1
+## 8.1         25             4         6          7.5          1
+## 8.2         25             4         6          7.5          1
+## 8.3         25             4         6          7.5          1
+## 8.4         25             4         6          7.5          1
+## 8.5         25             4         6          7.5          1</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#df3 &lt;- merge(df1, df2) Not appropirate function</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#df3 %&gt;% arrange(mother_age)</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#unique(df3$dead)</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">#df4=rbind(df1, df2)  #Function in base R</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">#df4 %&gt;% arrange(mother_age)</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>df5<span class="ot">=</span><span class="fu">bind_rows</span>(df1, df2) <span class="co"># Function in dplyr</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>df5 <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(mother_age)</span></code></pre></div>
+<pre><code>##          mother_age non_survivors birth_weight survivors Alive_Dead
+## 1                14             0          3.5         1          1
+## 2                16             1          4.0         0          0
+## 3                17             0          4.5         1          1
+## 4                18             0          5.0         2          1
+## 4.1              18             0          5.0         2          1
+## 5                19             0          6.0         4          1
+## 5.1              19             0          6.0         4          1
+## 5.2              19             0          6.0         4          1
+## 5.3              19             0          6.0         4          1
+## 6                20             0          6.5         5          1
+## 6.1              20             0          6.5         5          1
+## 6.2              20             0          6.5         5          1
+## 6.3              20             0          6.5         5          1
+## 6.4              20             0          6.5         5          1
+## 7...15           22             3          7.0         2          0
+## 7.1...16         22             3          7.0         2          0
+## 7.2              22             3          7.0         2          0
+## 7...18           22             3          7.0         2          1
+## 7.1...19         22             3          7.0         2          1
+## 8...20           25             4          7.5         6          0
+## 8.1...21         25             4          7.5         6          0
+## 8.2...22         25             4          7.5         6          0
+## 8.3...23         25             4          7.5         6          0
+## 8...24           25             4          7.5         6          1
+## 8.1...25         25             4          7.5         6          1
+## 8.2...26         25             4          7.5         6          1
+## 8.3...27         25             4          7.5         6          1
+## 8.4              25             4          7.5         6          1
+## 8.5              25             4          7.5         6          1</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">row.names</span>(df5)<span class="ot">&lt;-</span><span class="cn">NULL</span>  <span class="co"># this removes the row names</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>df5 <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(mother_age)</span></code></pre></div>
+<pre><code>##    mother_age non_survivors birth_weight survivors Alive_Dead
+## 1          14             0          3.5         1          1
+## 2          16             1          4.0         0          0
+## 3          17             0          4.5         1          1
+## 4          18             0          5.0         2          1
+## 5          18             0          5.0         2          1
+## 6          19             0          6.0         4          1
+## 7          19             0          6.0         4          1
+## 8          19             0          6.0         4          1
+## 9          19             0          6.0         4          1
+## 10         20             0          6.5         5          1
+## 11         20             0          6.5         5          1
+## 12         20             0          6.5         5          1
+## 13         20             0          6.5         5          1
+## 14         20             0          6.5         5          1
+## 15         22             3          7.0         2          0
+## 16         22             3          7.0         2          0
+## 17         22             3          7.0         2          0
+## 18         22             3          7.0         2          1
+## 19         22             3          7.0         2          1
+## 20         25             4          7.5         6          0
+## 21         25             4          7.5         6          0
+## 22         25             4          7.5         6          0
+## 23         25             4          7.5         6          0
+## 24         25             4          7.5         6          1
+## 25         25             4          7.5         6          1
+## 26         25             4          7.5         6          1
+## 27         25             4          7.5         6          1
+## 28         25             4          7.5         6          1
+## 29         25             4          7.5         6          1</code></pre>
+<p>The above functions are now to be applied to the data sets of Karn and Penrose</p>
+<hr />
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>T2i <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;DATA/T2i.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Rows: 261 Columns: 4
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## dbl (4): Mother_age, Count_Non_survivors, Count_Total_Birth, Birth_weight
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>T2i</span></code></pre></div>
+<pre><code>## # A tibble: 261 × 4
+##    Mother_age Count_Non_survivors Count_Total_Birth Birth_weight
+##         &lt;dbl&gt;               &lt;dbl&gt;             &lt;dbl&gt;        &lt;dbl&gt;
+##  1         16                   0                 1          9.5
+##  2         16                   0                 2          9  
+##  3         16                   0                 1          8.5
+##  4         16                   0                 3          8  
+##  5         16                   0                 7          7.5
+##  6         16                   0                 2          7  
+##  7         16                   0                 4          6.5
+##  8         16                   0                 2          6  
+##  9         16                   0                 2          5.5
+## 10         16                   0                 1          5  
+## # … with 251 more rows</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df<span class="ot">=</span><span class="fu">as.data.frame</span>(T2i)<span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">survivors =</span> Count_Total_Birth <span class="sc">-</span> Count_Non_survivors)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df, <span class="at">n=</span><span class="dv">8</span>)</span></code></pre></div>
+<pre><code>##   Mother_age Count_Non_survivors Count_Total_Birth Birth_weight survivors
+## 1         16                   0                 1          9.5         1
+## 2         16                   0                 2          9.0         2
+## 3         16                   0                 1          8.5         1
+## 4         16                   0                 3          8.0         3
+## 5         16                   0                 7          7.5         7
+## 6         16                   0                 2          7.0         2
+## 7         16                   0                 4          6.5         4
+## 8         16                   0                 2          6.0         2</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>df1<span class="ot">&lt;-</span> <span class="fu">untable</span>(df[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">5</span>)], <span class="at">num =</span> df[,<span class="dv">3</span>])<span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Count_Non_survivors <span class="sc">&gt;</span> <span class="dv">0</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dead =</span> <span class="fu">ifelse</span>(Count_Non_survivors<span class="sc">&gt;=</span><span class="dv">0</span>,<span class="dv">0</span>))</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>df2<span class="ot">&lt;-</span> <span class="fu">untable</span>(df[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">4</span>)], <span class="at">num =</span> df[,<span class="dv">2</span>])<span class="sc">%&gt;%</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(survivors <span class="sc">&gt;</span><span class="dv">0</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Survivors =</span> <span class="fu">ifelse</span>(survivors <span class="sc">&gt;</span><span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>df3 <span class="ot">&lt;-</span> <span class="fu">merge</span>(df1, df2)</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df3, <span class="at">n=</span><span class="dv">8</span>)</span></code></pre></div>
+<pre><code>##   Mother_age Count_Non_survivors Birth_weight survivors dead Survivors
+## 1         18                   1          4.5         4    0         1
+## 2         18                   1          4.5         4    0         1
+## 3         18                   1          4.5         4    0         1
+## 4         18                   1          4.5         4    0         1
+## 5         18                   1          4.5         4    0         1
+## 6         18                   1          6.0        30    0         1
+## 7         18                   1          6.0        30    0         1
+## 8         18                   1          6.0        30    0         1</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(df3<span class="sc">$</span>dead)</span></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fl">7.424e-4</span></span></code></pre></div>
+<pre><code>## [1] 0.0007424</code></pre>
+</div>
 
 
 
@@ -520,6 +738,11 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
 
 <script>
 $(document).ready(function ()  {

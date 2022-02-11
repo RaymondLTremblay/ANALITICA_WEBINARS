@@ -4,15 +4,13 @@
 }
 
 
-
 body {
     counter-reset: li; /* initialize counter named li */
-      background-image: url("Graficos/Analitica.png");
+      
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: right top;
   background-size: 200px;
-  margin-top: 40px;
 }
 
 h1 {
@@ -35,8 +33,8 @@ ol > li {
     margin:0 0 10px 2em; /* Give each list item a left margin to make room for the numbers */
     padding:10px 80px; /* Add some spacing around the content */
     list-style:none; /* Disable the normal item numbering */
-    border-top:2px solid #3d6b59; /* dark green */
-    background:rgba(44, 150, 23, 0.1); /* green */
+    border-top:2px solid #317EAC;
+    background:rgba(49, 126, 172, 0.1);
 }
 ol > li:before {
     content:"" counter(li); /* Use the counter as content */
@@ -53,9 +51,9 @@ ol > li:before {
        generated content but not positioning it (Camino 2 is one example) */
     margin-right:8px;
     padding:4px;
-    border-top:2px solid #3d6b59; /* blue */
-    color:#fff; /* white */
-    background:#2c9617; /* green */
+    border-top:2px solid #317EAC;
+    color:#fff;
+    background:#317EAC;
     font-weight:bold;
     font-family:"Helvetica Neue", Arial, sans-serif;
     text-align:center;
@@ -69,11 +67,11 @@ ol ol li:last-child {margin-bottom:0;}
 }
 
 hr {
-    border: 5px solid #3d6b59; /* blue */
+    border: 5px solid #357FAA;
 }
 
 div#boxedtext {
-    background-color: rgba(60, 207, 31,0.2); /* green */
+    background-color: rgba(86, 155, 189, 0.2);
     padding: 20px;
     margin-bottom: 20px;
     font-size: 10pt;
@@ -82,10 +80,10 @@ div#boxedtext {
 div#template {
     margin-top: 30px;
     margin-bottom: 30px;
-    color: #808080; /* grey */
+    color: #808080;
     border:1px solid #808080;
     padding: 10px 10px;
-    background-color: rgba(128, 128, 128, 0.2); /* grey */
+    background-color: rgba(128, 128, 128, 0.2);
     border-radius: 5px;
 }
 
@@ -105,3 +103,5 @@ blockquote {
   font-size: 14px;
   border-left: 5px solid #eee;
 }
+
+/*background-image: url("Graficos/Number_species_vs_Alien.png"); it goes in body if needed/*
