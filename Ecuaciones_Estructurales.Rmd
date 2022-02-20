@@ -17,7 +17,7 @@ output:
 
 - Dia del Taller: el 10 de febrero, 2022
 - Recurso: Dr. Ernesto Rosario-Hernández
-- Asociación Académida: **Ponce Health Science University**
+- Associación Académida: **Ponce Health Science University**
 - Correo ellectornico: erosario@psm.edu
 
 

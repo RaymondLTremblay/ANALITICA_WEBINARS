@@ -8,6 +8,7 @@ output:
 #  theme: simplex   To have the TOC in Red
     toc: yes
     toc_float: yes
+    code_folding: hide
 ---
 
 ```{r setup, include=FALSE}
@@ -21,4 +22,35 @@ Fecha de la ultima revisión
 Sys.Date()
 ```
 
-## Objective 
+***
+
+# ANALITCA WEBINARS
+
+***
+## Webinars Mensuales
+
+La Fundación ANALITICA presenta Webinars sobre diversos temas de analisis cuantitativos. Los Webinars se ofrecen los segundo jueves de cada mes a las 7pm (AST).  Estas presentación son en español.
+
+
+```{r include=FALSE}
+library(tidyverse)
+library(gt)
+```
+
+
+# Conferencias ofrecidas 
+
+```{r}
+calendario=tribble(
+  ~Fecha, ~Año, ~Tema, ~Recurso,
+  "9 de septiembre", 2021, "Introducción a RMarkdown", "Raymond L. Tremblay, PhD",
+  "21 de octubre", 2021, "Introducción a RStudio Cloud", "Denny Fernandez del Viso, PhD",
+  "11 de novienbre", 2021, "Introducción a ggplot2", "Marijulie Martinez-Lozano, DrPH",
+  "9 de diciembre", 2021, "Introducción a al paquete Leaflet", "Normandie Gonzalez, Estudiante graduada",
+  "13 de enero", 2022, "Introducción a Machine Learning", "Jeffrey Chan, Estudiante graduado",
+  "10 de febrero", 2022, "Ecuaciones Estructurales", "Ernesto Rosario Hernández, PhD"
+)
+gt(calendario)
+```
+
+

@@ -1,0 +1,448 @@
+---
+title: "ggplot2"
+output:
+  html_document:
+    css: ANALITICA_WEB.css
+    fig_caption: yes
+    highlight: pygments
+    toc: yes
+    toc_float: yes
+    code_folding: hide
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Conociendo ![](Graficos/ggplot2_logo.png)
+
+- Dia del Taller: el 11 de noviembre, 2021
+- Recurso: Marijulie Martinez-Lozano, DrPH
+- Associación Académida: **???**
+- Correo ellectornico: marijulie.martinez@upr.edu
+
+
+***
+
+# Contenido
+* Qué es ggplot2?
+* Conceptos básicos de ggplot2
+* Gráficas con ggplot2
+
+***
+
+# Enlaces para acceso a los Videos en el Canal de YOUTUBE ANALITICA Fundación
+
+Los sigientes enlaces corresponde a la presentación abajo
+
+[Video_1](https://www.youtube.com/watch?v=3zNqrzi_ttc)
+
+[Video_2](https://www.youtube.com/watch?v=SuhrrM3SyfI)
+
+[Video_3](https://www.youtube.com/watch?v=w513zEiN3SQ)
+
+[Video_4](https://www.youtube.com/watch?v=fJdb5RJSPU8)
+
+***
+
+***
+
+
+# Qué es ggplot2?
+
+**ggplot2** es un paquete de visualización de datos que nos permite  elaborar un gráfico a partir de un proceso de acumulación de capas, mejor conocido como "layers". A través de ggplot2 podemos realizar gráficas y costomizarlos de acuerdo al público e información que deseemos presentar. 
+
+### Función básica de ggplot
+
+ >ggplot(data = <DATA>)+<GEOM_FUNCTION>(mapping = aes(<MAPPINGS>))
+
+ * ggplot2 crea gráficos a través de capas utilizando funciones geom_.
+ * "aes"=aesthetics=estética (color, tamaño, ejes)
+
+***
+
+## Instalación de ggplot
+    "install.packages("ggplot2")"  
+
+## Activación de ggplot2
+
+```{r}
+library (ggplot2)
+```
+
+***
+
+## Datos 
+
+Datos sacados de: https://www.kaggle.com/fedesoriano/heart-failure-prediction
+
+Los datos se pueden aceder en el siguiente enlace [heart-corazon](DATA/heart.csv)
+
+```{r include=FALSE}
+library(readr)
+heart <- read_csv("DATA/heart.csv")
+
+```
+
+***
+
+###Resumen de la base de datos
+```{r}
+library(gt)
+summary(heart)
+gt(head(heart))
+
+
+```
+
+***
+
+# Tipos de gráficas
+
+### Histograma: Una variable continua 
+```{r}
+ggplot(data=heart)+geom_histogram(aes(Age), binwidth = 2)
+```
+
+***
+
+### Gráfica de densidad: Una variable continua 
+```{r}
+ggplot(data=heart)+geom_density(aes(Age))
+```
+
+***
+
+### Gráfica de dispersión (scatterplot): Dos variables continuas 
+```{r}
+ggplot(data=heart)+ geom_point(aes(x=Age, y=MaxHR))
+
+```
+
+***
+
+### Gráfica de dispersión (scatterplot): Dos variables continuas dividida por una variable categórica (versión 1 utilizando "color")
+```{r}
+ggplot(data=heart)+ geom_point(aes(x=Age, y=MaxHR, color=Sex))
+
+```
+
+***
+
+### Gráfica de dispersión (scatterplot): Dos variables continuas dividida por una varaible categórica (versión 2 utilizando "facet_wrap")
+```{r}
+ggplot(data=heart)+ geom_point(aes(x=Age, y=MaxHR, color=Sex))+facet_wrap(~Sex)
+```
+
+***
+
+### Gráfica de caja (Boxplot):variables discretas y continuas 
+```{r}
+ggplot(data=heart)+ geom_boxplot(aes(x=Sex, y=MaxHR))
+
+```
+
+***
+
+### Gráfica de caja (Boxplot):variables discretas y continuas 
+```{r}
+ggplot(data=heart, aes(x=Sex, y=MaxHR))+ geom_boxplot()+
+  geom_jitter(alpha = 0.4, color = "navy")
+```
+
+
+***
+
+### Gráfica de caja (Boxplot): distribución del ritmo cardiaco dividido por tipo de dolor de pecho
+
+  * TA=typical angina
+  * ATA=Atypical Angina 
+  * NAP=Non-Anginal Pain
+  * ASY= Asymptomatic
+
+```{r}
+ggplot(data=heart)+ geom_boxplot(aes(x=ChestPainType, y=MaxHR))
+
+```
+
+***
+
+### Gráfica de caja (Boxplot): distribución del ritmo cardiaco dividido por tipo de dolor de pecho y sexo
+
+```{r}
+ggplot(data=heart)+ geom_boxplot(aes(x=ChestPainType, y=MaxHR, fill=Sex))
+
+```
+
+***
+
+# El paquete *ggMarginal**
+
+## Uso básico de ggMarginal() se puede utilizar para histogramas, boxplot y gráficas de densidad
+
+    "install.packages("ggExtra")"
+
+```{r}
+library(ggExtra)
+
+ggplot(heart) +
+      geom_point(aes(x=Age, y=MaxHR, color=Sex)) 
+
+g1<-ggplot(heart) +
+      geom_point(aes(x=Age, y=MaxHR, color=Sex)) 
+
+  ggMarginal(g1, type="boxplot")
+```
+
+***
+
+
+# Creación de gráficas interactivas con el paquete **plotly**
+
+    "install.packages("plotly")"
+    
+```{r include=FALSE}
+library(plotly)
+```
+
+```{r}
+
+ggplot(data=heart) +
+  geom_point(aes(Age, MaxHR, color=ChestPainType)) +
+  theme_bw()
+
+g2 <- ggplot(data=heart) +
+  geom_point(aes(Age, MaxHR, color=ChestPainType)) +
+  theme_bw()
+
+ggplotly(g2)
+```
+
+***
+
+# Personalización de gráficas
+
+## Etiquetas ("labels")
+    "labs(
+      ...,
+      title = waiver(),
+      subtitle = waiver(),
+      caption = waiver(),
+      tag = waiver()"
+
+### Etiquetas de los ejes
+```{r}
+ggplot(data=heart)+ geom_boxplot(aes(x=ChestPainType, y=MaxHR))
+
+ggplot(data=heart)+ geom_boxplot(aes(x=ChestPainType, y=MaxHR))+
+  labs(x = "Tipo de dolor de pecho", y="Ritmo cardiaco máximo")
+
+```
+
+***
+
+### Etiquetas del título y subtítulo 
+```{r}
+ggplot(data=heart)+ geom_boxplot(aes(x=ChestPainType, y=MaxHR))+
+  labs(x = "Tipo de dolor de pecho", y="Ritmo cardiaco máximo", title="Distribución del ritmo cardiaco máximo por tipo de dolor de pecho", subtitle = "XXX", tag = "Gráfica 1")
+
+```
+
+***
+
+### Como remover las etiquetas
+
+```{r}
+ggplot(data=heart)+ geom_boxplot(aes(x=ChestPainType, y=MaxHR))+
+  labs(x = NULL , y="Ritmo cardiaco máximo", title="Distribución del ritmo cardiaco máximo por tipo de dolor de pecho", subtitle = "XXX", tag = "Gráfica 1")
+
+```
+
+***
+
+## Temas (themes)
+  
+  Temas disponibles en ggplot:
+    "theme_classic() theme_bw() theme_dark() theme_minimal() theme_grey()" 
+    
+```{r}
+ggplot(data=heart)+ geom_boxplot(aes(x=ChestPainType, y=MaxHR))+
+  labs(x = "Tipo de dolor de pecho", y="Ritmo cardiaco máximo", 
+       title="Distribución del ritmo cardiaco máximo por tipo de dolor de pecho", 
+       subtitle = "XXX", tag = "Gráfica 1")+
+  theme_grey() 
+ 
+```
+
+
+***
+
+### Apariencia de las etiquetas
+  
+  * family : tipo de letra
+  * face : valores posible= “plain”, “italic”, “bold” and “bold.italic”
+  * colour : color del texto
+  * size : tamaño del text0
+  * hjust : horizontal justification (in [0, 1])
+  * vjust : vertical justification (in [0, 1])
+  * lineheight : altura de la línea. En texto de varias líneas, el argumento line height se utiliza para cambiar el espacio entre líneas.
+
+
+```{r}
+ggplot(data=heart)+ geom_boxplot(aes(x=ChestPainType, y=MaxHR))+
+  labs(x = "Tipo de dolor de pecho", y="Ritmo cardiaco máximo", 
+       title="Distribución del ritmo cardiaco máximo por tipo de dolor de pecho", 
+       subtitle = "XXX", tag = "Gráfica 1")+
+  theme_classic() + theme(
+plot.title = element_text(color="cyan4", size=12, face="bold.italic"),
+axis.title.x = element_text(color="darkorange2", size=12, face="bold"),
+axis.title.y = element_text(color="darkorange2", size=12, face="bold")
+)
+```
+
+***
+
+## Color
+
+Existen múltiples paletas de colores, ejemplo:
+![](/users/mml/Desktop/Playing with R/ggplot2-colour-names.png)"
+
+
+## Función de "colour" con colores del sistema
+```{r}
+ggplot(data=heart)+ geom_boxplot(aes(x=ChestPainType, y=MaxHR, colour=ChestPainType))+
+  labs(x = "Tipo de dolor de pecho", y="Ritmo cardiaco máximo", 
+       title="Distribución del ritmo cardiaco máximo por tipo de dolor de pecho", 
+       tag = "Gráfica 1")+
+  theme_classic()
+ 
+```
+
+***
+
+## Función de "fill" con colores del sistema
+```{r}
+ggplot(data=heart)+ geom_boxplot(aes(x=ChestPainType, y=MaxHR, fill=ChestPainType))+
+  labs(x = "Tipo de dolor de pecho", y="Ritmo cardiaco máximo", 
+       title="Distribución del ritmo cardiaco máximo por tipo de dolor de pecho", 
+      tag = "Gráfica 1")+
+  theme_classic() 
+```
+
+***
+
+## Uso de la función de fill" con colores seleccionados manualmente
+```{r}
+ggplot(data=heart)+ geom_boxplot(aes(x=ChestPainType, y=MaxHR, fill=ChestPainType))+
+  labs(x = "Tipo de dolor de pecho", y="Ritmo cardiaco máximo", 
+       title="Distribución del ritmo cardiaco máximo por tipo de dolor de pecho", 
+      tag = "Gráfica 1")+
+  theme_classic()+
+  scale_fill_manual(values = c("olivedrab3", "orange1", "turquoise3", "thistle3"))
+```
+
+***
+
+# Otras modificaciones
+
+## Ubicación de la leyenda (arriba)
+```{r}
+ggplot(data=heart)+ geom_boxplot(aes(x=ChestPainType, y=MaxHR, fill=ChestPainType))+
+  labs(x = "Tipo de dolor de pecho", y="Ritmo cardiaco máximo", 
+       title="Distribución del ritmo cardiaco máximo por tipo de dolor de pecho", 
+      tag = "Gráfica 1")+
+  theme_classic()+
+  scale_fill_manual(values = c("olivedrab3", "orange1", "turquoise3", "thistle3")) + 
+  theme(legend.position="top")
+```
+***
+
+## Ubicación de la leyenda (abajo)
+```{r}
+ggplot(data=heart)+ geom_boxplot(aes(x=ChestPainType, y=MaxHR, fill=ChestPainType))+
+  labs(x = "Tipo de dolor de pecho", y="Ritmo cardiaco máximo", 
+       title="Distribución del ritmo cardiaco máximo por tipo de dolor de pecho", 
+      tag = "Gráfica 1")+
+  theme_classic()+
+  scale_fill_manual(values = c("olivedrab3", "orange1", "turquoise3", "thistle3")) + 
+  theme(legend.position="bottom")
+```
+
+***
+
+
+## Ubicación de la leyenda (remover leyenda)
+```{r}
+ggplot(data=heart)+ geom_boxplot(aes(x=ChestPainType, y=MaxHR, fill=ChestPainType))+
+  labs(x = "Tipo de dolor de pecho", y="Ritmo cardiaco máximo", 
+       title="Distribución del ritmo cardiaco máximo por tipo de dolor de pecho", 
+      tag = "Gráfica 1")+
+  theme_classic()+
+  scale_fill_manual(values = c("olivedrab3", "orange1", "turquoise3", "thistle3")) + 
+  theme(legend.position="none")
+```
+
+***
+
+## Cambiar nombres de valores
+
+```{r}
+ggplot(data=heart)+ geom_boxplot(aes(x=ChestPainType, y=MaxHR, fill=ChestPainType))+
+  labs(x = "Tipo de dolor de pecho", y="Ritmo cardiaco máximo", 
+       title="Distribución del ritmo cardiaco máximo por tipo de dolor de pecho", 
+      tag = "Gráfica 1")+
+  theme_classic()+
+  scale_fill_manual(values = c("olivedrab3", "orange1", "turquoise3", "thistle3")) + 
+  theme(legend.position="none")+
+  scale_x_discrete(labels=c("ASY" = "Asintomático", "ATA" = "Angina atípica",
+                              "NAP" = "Dolor no anginoso", "TA"= "Angina típica"))
+
+
+```
+
+***
+
+# Función para guardar las gráficas
+
+```{r}
+graf3<-ggplot(data=heart)+ geom_boxplot(aes(x=ChestPainType, y=MaxHR, fill=ChestPainType))+
+  labs(x = "Tipo de dolor de pecho", y="Ritmo cardiaco máximo", 
+       title="Distribución del ritmo cardiaco máximo por tipo de dolor de pecho", 
+      tag = "Gráfica 1")+
+  theme_classic()+
+  scale_fill_manual(values = c("olivedrab3", "orange1", "turquoise3", "thistle3")) + 
+  theme(legend.position="none")+
+  scale_x_discrete(labels=c("ASY" = "Asintomático", "ATA" = "Angina atípica",
+                              "NAP" = "Dolor no anginoso", "TA"= "Angina típica"))
+
+```
+
+
+```{r}
+ggsave("Gráfica1.png", graf3, width = 15, height = 10)
+```
+
+
+***
+
+# últimos ajustes 
+
+```{r}
+graf4<-graf3+ theme(
+plot.title = element_text(size=12, face="bold.italic"),
+axis.title.x = element_text(size=12, face="bold"),
+axis.title.y = element_text(size=12, face="bold")
+)
+
+graf4
+```
+
+
+```{r}
+ggsave("Gráfica1.png", graf4)
+```
+
+
+

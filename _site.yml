@@ -4,12 +4,16 @@ navbar:
   left: 
     - 
       href: Descripcion.html
-      text: Home
+      text: "Calendario"
     - 
       menu: 
         - 
           href: RMarkdown.html
           text: 'Introducción a RMarkdown'
+        - 
+          href: Intro-to-ggplot2.html
+          text: 'Introducción a ggplot2'    
+          
       text: "RStudio"
     -  
       menu:
