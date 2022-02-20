@@ -1,0 +1,75 @@
+---
+title: "Introduccion Machine Learning"
+output:
+  html_document:
+    css: ANALITICA_WEB.css
+    fig_caption: yes
+    highlight: pygments
+#  theme: simplex   To have the TOC in Red
+    toc: yes
+    toc_float: yes
+    code_folding: hide
+---
+
+***
+
+# Introducción a Machine Learning en Python
+
+- Dia del Taller: el 13 de enero, 2022
+- Recurso: Jeffrey Chan Santiago, Estudiante Graduado
+- Associación Académida: **Universidad de Puerto Rico - Rio Piedras**
+- Correo ellectornico: jeffrey.chan@upr.edu
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+***
+
+## ¿Qué es Machine Learning?
+
+ > ????
+ 
+ 
+***
+
+# Enlaces para acceso a los Videos en el Canal de YOUTUBE ANALITICA Fundación
+
+Los sigientes enlaces corresponde a la presentación abajo
+
+[Video_1](https://www.youtube.com/watch?v=yEq3hxExUjo)
+
+[Video_2](https://www.youtube.com/watch?v=j1y8LmjE4qE)
+
+[Video_3](https://www.youtube.com/watch?v=R7foLN2GSew)
+
+[Video_4](https://www.youtube.com/watch?v=7x7wRnCUwhY)
+
+[Video_5](https://www.youtube.com/watch?v=gZ2RqyqJEJc)
+
+[Video_6](https://www.youtube.com/watch?v=gyzqGTdlo7Q)
+
+[Video_7](https://www.youtube.com/watch?v=KbX3j2-hJ0E)
+
+[Video_8](https://www.youtube.com/watch?v=wa9SUxC6_oY)
+
+***
+
+
+
+***
+
+## Presentación 
+
+La presentación esta disponible en Power Point en el siguiente enlace [Introducción a Machine Leaning](Presentaciones/ml_analitica.pptx).
+
+***
+
+
+## Los scripts para reproducir todo los ejercicios mencionado en los videos
+
+
+Los scripts estan disponible en este notebook de [IPython](Python_scripts/introduction_ml.ipynb)
+
+[Vea este este enlace](Presentaciones/introduction_ml_html5_video.html)
+

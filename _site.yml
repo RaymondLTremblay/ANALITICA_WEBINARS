@@ -11,8 +11,15 @@ navbar:
           href: RMarkdown.html
           text: 'Introducción a RMarkdown'
         - 
+          href: RStudio_Cloud.html
+          text: 'RStudio Cloud'          
+        - 
           href: Intro-to-ggplot2.html
-          text: 'Introducción a ggplot2'    
+          text: 'Introducción a ggplot2'
+          
+        - 
+          href: Mapas_Interactivos_con_Leaflet.html
+          text: 'Mapas Interactivos con Leaflet'      
           
       text: "RStudio"
     -  
@@ -22,10 +29,13 @@ navbar:
           text: 'Introducción a Python'
       text: "Python"
     - 
-      menu: 
+      menu:
+        - 
+          href: Introduccion_machine_learning.html
+          text: 'Introducción a Machine Learning'     
         - 
           href: Ecuaciones_Estructurales.html
           text: 'Ecuaciones Estructurales'
-      text: "Estadistica y Modelos"
+      text: "Estadística y Modelos"
   title: "ANALITICA Fundación Webinars"
 output_dir: "."

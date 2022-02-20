@@ -1,0 +1,61 @@
+---
+title: "RStudio Cloud"
+output:
+  html_document:
+    css: ANALITICA_WEB.css
+    fig_caption: yes
+    highlight: pygments
+#  theme: simplex   To have the TOC in Red
+    toc: yes
+    toc_float: yes
+    code_folding: hide
+---
+
+***
+
+# Introducción a RStudio Cloud
+
+- Dia del Taller: el 21 de octubre, 2021
+- Recurso: Dr. Denny Fernandez del Viso, PhD
+- Associación Académida: **Universidad de Puerto Rico - Humacao**
+- Correo ellectornico: dsfernandez@gmail.com
+
+
+
+
+
+***
+
+## ¿Qué es RStudio Cloud?
+
+ > 
+
+
+***
+
+# Enlaces para acceso a los Videos en el Canal de YOUTUBE ANALITICA Fundación
+
+Los sigientes enlaces corresponde a la presentación abajo
+
+[Video_1](https://www.youtube.com/watch?v=NXvBFr7bOnQ)
+
+[Video_2](https://www.youtube.com/watch?v=rsxzRwTvvQs)
+
+[Video_3](https://www.youtube.com/watch?v=cUck7JMOGmU)
+
+[Video_4](https://www.youtube.com/watch?v=jAzX2aziBT0)
+
+[Video_5](https://www.youtube.com/watch?v=e1ixkITcayE)
+
+[Video_6](https://www.youtube.com/watch?v=u9PyP1ivg_U)
+
+[Video_7](https://www.youtube.com/watch?v=oBARmpkTAag)
+
+[Video_8](https://www.youtube.com/watch?v=YfMCKD8vXK4)
+
+***
+
+
+## Recursos Suplementario
+
+

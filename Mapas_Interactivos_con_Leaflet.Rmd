@@ -1,0 +1,59 @@
+---
+title: "Mapas_Interactivos"
+output:
+  html_document:
+    css: ANALITICA_WEB.css
+    fig_caption: yes
+    highlight: pygments
+#  theme: simplex   To have the TOC in Red
+    toc: yes
+    toc_float: yes
+    code_folding: hide
+---
+
+***
+
+# Introducción a Mapas Interactivos con **Leaflet** 
+
+- Dia del Taller: el 9 de diciembre, 2021
+- Recurso: Normandie Gonzalez_Orrelana
+- Associación Académida: **Universidad de Puerto Rico- Rio Piedras, Estudiante Graduada**
+- Correo ellectornico: normandie.gonzalez@upr.edu
+
+
+***
+
+## ¿Mapas Interactivos con **Leaflet**?
+
+ > 
+
+
+***
+
+## Video de la Presentación
+
+# Enlaces para acceso a los Videos en el Canal de YOUTUBE ANALITICA Fundación
+
+Los sigientes enlaces corresponde a la presentación abajo
+
+[Video_1](https://www.youtube.com/watch?v=ylUR8POEh-s)
+
+[Video_2](https://www.youtube.com/watch?v=FP347p404ME)
+
+[Video_3](https://www.youtube.com/watch?v=98vR0agbAcA)
+
+[Video_4](https://www.youtube.com/watch?v=diYVZVtX9KA)
+
+
+***
+
+
+
+
+
+
+## Recursos Suplementario
+
+Para más información sobre Ecuaciones Estructurales vea el siguiente enlace
+
+[Gaskination](http://statwiki.gaskination.com/index.php?title=Main_Page)
