@@ -59,3 +59,8 @@ Los sigientes enlaces corresponde a la presentación abajo
 ## Recursos Suplementario
 
 
+
+### Anuncio del taller
+
+
+![RStudio Cloud](Fliers/ANALTICA_RStudio_CLOUD.png)

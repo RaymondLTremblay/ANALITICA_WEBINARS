@@ -1,0 +1,60 @@
+---
+title: "RMarkdown"
+output:
+  html_document:
+    css: ANALITICA_WEB.css
+    fig_caption: yes
+    highlight: pygments
+#  theme: simplex   To have the TOC in Red
+    toc: yes
+    toc_float: yes
+    code_folding: hide
+---
+
+***
+
+# Introducción a Ecuaciones Estructurales
+
+- Dia del Taller: el 10 de febrero, 2022
+- Recurso: Raymond L. Tremblay, PhD
+- Associación Académida: **Universidad de Puerto Rico - Humacao**
+- Correo ellectornico: raymondtremblay@upr.edu
+
+
+
+
+
+***
+
+## ¿Qué es RMarkdown?
+
+ > 
+
+***
+
+## Video de la Presentación
+
+Vea el siguiente enlace para ver el video en el canal de Youtube de ANALITICA Fundación. 
+
+
+***
+
+## Recursos Suplementario
+
+[Video_1](https://www.youtube.com/watch?v=fQ_U2rql67c)
+
+[Video_2](https://www.youtube.com/watch?v=x7EEKkdXK94)
+
+[Video_3](https://www.youtube.com/watch?v=DSButqnutUw)
+
+[Video_4](https://www.youtube.com/watch?v=O6bsIFA8FXM)
+
+
+
+
+### Anuncio del taller
+
+
+![RMarkdown](Fliers/RMarkdown.jpg)
+
+

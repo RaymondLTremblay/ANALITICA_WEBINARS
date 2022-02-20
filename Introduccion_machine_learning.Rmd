@@ -71,5 +71,14 @@ La presentación esta disponible en Power Point en el siguiente enlace [Introduc
 
 Los scripts estan disponible en este notebook de [IPython](Python_scripts/introduction_ml.ipynb)
 
-[Vea este este enlace](Presentaciones/introduction_ml_html5_video.html)
+[Vea este enlace](Presentaciones/introduction_ml_html5_video.html)
+
+
+### Anuncio del taller
+
+
+
+
+![Machine Learning](Fliers/Intro_to machine_learning_flier.png)
+
 

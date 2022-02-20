@@ -446,3 +446,8 @@ ggsave("Gráfica1.png", graf4)
 
 
 
+### Anuncio del taller
+
+
+![ggplot2](Fliers/Flyer ggplot2.png)
+
