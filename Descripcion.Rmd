@@ -44,11 +44,13 @@ library(gt)
 calendario=tribble(
   ~Fecha, ~Año, ~Tema, ~Recurso,
   "9 de septiembre", 2021, "Introducción a RMarkdown", "Raymond L. Tremblay, PhD",
-  "21 de octubre", 2021, "Introducción a RStudio Cloud", "Denny Fernandez del Viso, PhD",
+  "21 de octubre", 2021, "Introducción a RStudio Cloud", "Denny Fernández del Viso, PhD",
   "11 de novienbre", 2021, "Introducción a ggplot2", "Marijulie Martinez-Lozano, DrPH",
-  "9 de diciembre", 2021, "Introducción a al paquete Leaflet", "Normandie Gonzalez, Estudiante graduada",
+  "9 de diciembre", 2021, "Introducción a al paquete Leaflet", "Normandie González, Estudiante graduada",
   "13 de enero", 2022, "Introducción a Machine Learning", "Jeffrey Chan, Estudiante graduado",
-  "10 de febrero", 2022, "Ecuaciones Estructurales", "Ernesto Rosario Hernández, PhD"
+  "10 de febrero", 2022, "Ecuaciones Estructurales", "Ernesto Rosario Hernández, PhD",
+  "10 de marzo", 2022, "Métodos estadísticos robustos", "Ricardo Morenna, PhD",
+  "14 de abril", 2022, "Regresiones beta", "Raymond L. Tremblay, PhD"
 )
 gt(calendario)
 ```

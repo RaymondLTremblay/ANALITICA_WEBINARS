@@ -17,8 +17,8 @@ output:
 
 - Dia del Taller: el 21 de octubre, 2021
 - Recurso: Dr. Denny Fernandez del Viso, PhD
-- Associación Académida: **Universidad de Puerto Rico - Humacao**
-- Correo ellectornico: dsfernandez@gmail.com
+- Asociación Académida: **Universidad de Puerto Rico - Humacao**
+- Correo electronico: dsfernandez@gmail.com
 
 
 

@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Normandie González-Orellana" />
+
+
+<title>Taller Manejo de Datos: Un Vistazo al paquete dplyr</title>
+
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">ANALITICA Fundación Webinars</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="Descripcion.html">Calendario</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    RStudio
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="RMarkdown.html">Introducción a RMarkdown</a>
+    </li>
+    <li>
+      <a href="RStudio_Cloud.html">RStudio Cloud</a>
+    </li>
+    <li>
+      <a href="Intro-to-ggplot2.html">Introducción a ggplot2</a>
+    </li>
+    <li>
+      <a href="dplyr-workshop.html">Manipulaciones de datos con dplyr</a>
+    </li>
+    <li>
+      <a href="Mapas_Interactivos_con_Leaflet.html">Mapas Interactivos con Leaflet</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Python
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Python.html">Introducción a Python</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Estadística y Modelos
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Introduccion_machine_learning.html">Introducción a Machine Learning</a>
+    </li>
+    <li>
+      <a href="Ecuaciones_Estructurales.html">Ecuaciones Estructurales</a>
+    </li>
+    <li>
+      <a href="metodos_estadisticos-robustos.html">Métodos Estadísticos Robustos</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Taller Manejo de Datos: Un Vistazo al paquete dplyr</h1>
+<h4 class="author">Normandie González-Orellana</h4>
+<h4 class="date">8/24/2021</h4>
+
+</div>
+
+
+<style>
+body {
+text-align: justify}
+</style>
+<hr />
+<div id="manejo-de-datos-un-vistazo-al-paquete-dplyr" class="section level1">
+<h1>Manejo de datos: Un vistazo al paquete <strong>dplyr</strong></h1>
+<ul>
+<li>Dia del Taller: el 9 de septiembre, 2021</li>
+<li>Recurso: Normandie Gonzalez_Orrelana</li>
+<li>Asociación Académida: <strong>Universidad de Puerto Rico- Rio Piedras, Estudiante Graduada</strong></li>
+<li>Correo electronico: <a href="mailto:normandie.gonzalez@upr.edu" class="email">normandie.gonzalez@upr.edu</a></li>
+</ul>
+<hr />
+<div id="video-de-la-presentación" class="section level2">
+<h2>Video de la Presentación</h2>
+</div>
+</div>
+<div id="enlaces-para-acceso-a-los-videos-en-el-canal-de-youtube-analitica-fundación" class="section level1">
+<h1>Enlaces para acceso a los Videos en el Canal de YOUTUBE ANALITICA Fundación</h1>
+<p>Los sigientes enlaces corresponde a la presentación abajo</p>
+<p><a href="">Video_1</a></p>
+<p><a href="">Video_2</a></p>
+<p><a href="">Video_3</a></p>
+<p><a href="">Video_4</a></p>
+<hr />
+<div id="recursos-suplementario" class="section level2">
+<h2>Recursos Suplementario</h2>
+<p>Encontrarán el archivo de datos en el siguiente <a href="DATA/PsychilisFALSE.xlsx">enlace</a></p>
+<div id="el-proceso-de-la-ciencia-de-datos" class="section level3">
+<h3>El Proceso de la Ciencia de Datos</h3>
+<p><img src="Graficos/CienciaDatosProcesos.jpeg" width="800" style="display: block; margin: auto;" /></p>
+<p>La Ciencia de Datos es una disciplina amplia y multidisciplinaria que combina el método científico, la ciencia de cómputos y las matemáticas. La ciencia de datos conlleva un proceso cuyo meta final es la obtención de información y nuevos conocimientos de los datos disponibles. A continuación un resumen del proceso de la Ciencia de datos:</p>
+<ul>
+<li><p><strong>Obtención de Datos:</strong> La obtención de los datos puede ser desde cero mediante experimentación y/u observación. También se pueden utilizar datos disponibles de manera gratuita o no, a través de bases de datos. Otra forma de obtener datos es hacer una revisión de literatura y reunir datos disponibles en publicaciones previas.</p></li>
+<li><p><strong>Limpieza o Procesamiento de Datos:</strong> Muchas veces los datos obtenidos, independientemente de su fuente, necesitan ser limpiados y organizados antes de poder ser analizados. Por ejemplo, es posible tener una cantidad de datos mucho más grande de la necesaria o que los datos necesarios estén entrelazados con otra información superflua para los propósitos del estudio. Entonces, se utiliza herramientas de programación para filtrar los datos necesarios (limpiarlos) y deshacernos de esa información sobrante que podría entorpecer el análisis que se quiere realizar.</p></li>
+<li><p><strong>Exploración:</strong> Es sumamente importante, antes de realizar cualquier prueba estadística, conocer los datos disponibles. Características de los datos como cuántas variables, qué tipo de variables, distribución, si hay datos faltantes (<em>NA</em>’s), <em>etc</em>., son imprescindibles a la hora de escoger la prueba estadística o modelo a utilizar.</p></li>
+<li><p><strong>Modelaje:</strong> Una vez terminada la exploración de los datos se procede a utilizar pruebas estadísticas que se ajustan a los datos, o a construir y entrenar modelos que ayudan a contestar las preguntas de la investigación y/o a obtener información de los datos.</p></li>
+<li><p><strong>Publicación:</strong> Una vez seguro de que su modelo se ajusta bien a los datos, ha sido entrenado correctamente, y ha obtenido resultados, fiel al método científico, toca la publicación de los hallazgos. En el caso de un científico de datos, esto puede ser a través de una publicación en una revista científica, al público en general a través de la prensa, en una presentación en una conferencia, o simplemente escribiendo un reporte interno para la compañía o institución para la cuál trabaja.</p></li>
+</ul>
+<p>En este taller nos concentraremos en la limpieza de datos. Presentaremos el paquete <em>dplyr</em> y algunas de sus funciones que son útiles para la limpieza y manejo de datos.</p>
+</div>
+<div id="manejo-de-datos-con-dplyr" class="section level3">
+<h3>Manejo de Datos con <em>dplyr</em></h3>
+<p>El paquete <em>dplyr</em> provee una gama de funciones que ayudan con la manipulación y manejo de datos. En este taller se utilizará un grupo de datos pequeños, pero es importante tener en mente que la utilidad de estas funciones es directamente proporcional al tamaño de los datos con los que se trabaja. Es decir, cuando lo observamos a pequeña escala, puede parecer que sería mejor hacer la manipulación sin el uso del paquete (directamente en Microsoft <em>Excel</em>, por ejemplo); pero cuando se trabaja con bases de datos extensas con cientos de variables y miles de observaciones y/o cuando se trabaja con datos obtenidos de bases de datos que no son fáciles de manipular, contar con el paquete <em>dplyr</em> es una ventaja. Otra ventaja de manipular los datos en R utilizando el paquete <em>dplyr</em> es que estos cambios sólo suceden en la sesión de R, o sea que los datos originales permanecen inalterados.</p>
+<p>Observe el grupo de datos en la Tabla 1:</p>
+<table style="width:10%; font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;border-bottom: 0;" class=" lightable-paper table">
+<caption>
+<b>Tabla 1:</b> Datos obtenidos apartir de observación en el campo.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+genero
+</th>
+<th style="text-align:left;">
+especie
+</th>
+<th style="text-align:left;">
+plot
+</th>
+<th style="text-align:left;">
+huesped
+</th>
+<th style="text-align:right;">
+numero_de_hojas
+</th>
+<th style="text-align:right;">
+numero_de_frutos
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Psychilis
+</td>
+<td style="text-align:left;">
+krugii
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Psychilis
+</td>
+<td style="text-align:left;">
+kraenzlinii
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Psichilis
+</td>
+<td style="text-align:left;">
+kraenzlinii
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+shrub
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Psychils
+</td>
+<td style="text-align:left;">
+krugii
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+rock
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Psychilis
+</td>
+<td style="text-align:left;">
+krugii
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+shrub
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Psychilis
+</td>
+<td style="text-align:left;">
+kraenzlinii
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Psychilis
+</td>
+<td style="text-align:left;">
+krugii
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Psychilis
+</td>
+<td style="text-align:left;">
+kraenzlinii
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Psychilis
+</td>
+<td style="text-align:left;">
+kraenzlinii
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Psychilis
+</td>
+<td style="text-align:left;">
+kraenzlinii
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+rock
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Psychilis
+</td>
+<td style="text-align:left;">
+krugii
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+rock
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Psychilis
+</td>
+<td style="text-align:left;">
+kraenzlinii
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+shrub
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Psychilis
+</td>
+<td style="text-align:left;">
+krugii
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Psychilis
+</td>
+<td style="text-align:left;">
+kraenzlinii
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+rock
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Psychilis
+</td>
+<td style="text-align:left;">
+krugii
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Psychilis
+</td>
+<td style="text-align:left;">
+krugii
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Psychilis
+</td>
+<td style="text-align:left;">
+krugii
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Psychilis
+</td>
+<td style="text-align:left;">
+krugii
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+shrub
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Psychilis
+</td>
+<td style="text-align:left;">
+kraenzlinii
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Psychilis
+</td>
+<td style="text-align:left;">
+krugii
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Psychilis
+</td>
+<td style="text-align:left;">
+kraenzlinii
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+shrub
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pyschilis
+</td>
+<td style="text-align:left;">
+kraenzlinii
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; " colspan="100%">
+<span style="font-style: italic;">*</span> <sup></sup> Los datos aquí presntados fueron artificialmente creados para este taller y no son necesariamente representativos de la realidad.
+</td>
+</tr>
+</tfoot>
+</table>
+<p>Los datos de la tabla 1 contienen 6 variables y 22 observaciones. Las primeras 4 variables son factoriales y las últimas dos son numéricas. Una forma sencilla de saber qué tipo de variables tiene un grupo de datos es con la función <code>summary()</code>:</p>
+<pre class="r"><code>summary(datos)</code></pre>
+<pre><code>##        genero          especie   plot    huesped   numero_de_hojas
+##  Psichilis: 1   kraenzlinii:11   1:10   rock : 4   Min.   :1.000  
+##  Psychilis:19   krugii     :11   2:12   shrub: 5   1st Qu.:2.000  
+##  Psychils : 1                           tree :12   Median :3.000  
+##  Pyschilis: 1                           NA&#39;s : 1   Mean   :3.286  
+##                                                    3rd Qu.:4.000  
+##                                                    Max.   :7.000  
+##                                                    NA&#39;s   :1      
+##  numero_de_frutos
+##  Min.   :0.0     
+##  1st Qu.:0.0     
+##  Median :0.0     
+##  Mean   :0.5     
+##  3rd Qu.:1.0     
+##  Max.   :3.0     
+##  NA&#39;s   :2</code></pre>
+<p>Pedirle un resumen de los datos a R con esta función quizá sea el mejor paso luego de importar los datos, pues nos permite tener una idea de la estructura de los datos y en ocasiones detectar errores rápidamente. Por ejemplo, en estos datos sólo se trabaja con un género de orquídeas, pero R está registrando 4; y con 2 especies, pero R está registrando 3. Esto se debe a errores ortográficos a la hora de la recolección y/o entrada de datos. Los errores ortográficos o la poca consistencia en la toma de datos es uno de los retos más comunes en la ciencia de datos. Los lenguajes de programación como R son sensitivos a la ortografía, y errores como este pueden afectar el análisis de los datos. El paquete <em>dplyr</em> y sus funciones <code>mutate()</code> y <code>recode()</code> pueden ayudar a resolver este asunto:</p>
+<pre class="r"><code>library(dplyr)
+library(forcats)
+
+datos %&gt;%
+  mutate(genero = recode_factor(genero,
+                                &quot;Psichilis&quot; = &quot;Psychilis&quot;,
+                                &quot;Psychils&quot; = &quot;Psychilis&quot;,
+                                &quot;Pyschilis&quot; = &quot;Psychilis&quot;))</code></pre>
+<pre><code>##       genero     especie plot huesped numero_de_hojas numero_de_frutos
+## 1  Psychilis      krugii    1    tree               2                0
+## 2  Psychilis kraenzlinii    1    tree               3                0
+## 3  Psychilis kraenzlinii    1   shrub               6               NA
+## 4  Psychilis      krugii    1    rock               5                0
+## 5  Psychilis      krugii    1   shrub               1                1
+## 6  Psychilis kraenzlinii    1    tree               3                1
+## 7  Psychilis      krugii    1    tree               2                0
+## 8  Psychilis kraenzlinii    1    tree               2                2
+## 9  Psychilis kraenzlinii    1    tree               4                0
+## 10 Psychilis kraenzlinii    1    rock               3                0
+## 11 Psychilis      krugii    2    rock              NA               NA
+## 12 Psychilis kraenzlinii    2   shrub               3                0
+## 13 Psychilis      krugii    2    tree               5                0
+## 14 Psychilis kraenzlinii    2    rock               2                0
+## 15 Psychilis      krugii    2    tree               4                1
+## 16 Psychilis      krugii    2    tree               1                1
+## 17 Psychilis      krugii    2    tree               2                3
+## 18 Psychilis      krugii    2   shrub               7                0
+## 19 Psychilis kraenzlinii    2    &lt;NA&gt;               5                0
+## 20 Psychilis      krugii    2    tree               3                0
+## 21 Psychilis kraenzlinii    2   shrub               4                1
+## 22 Psychilis kraenzlinii    2    tree               2                0</code></pre>
+<p>Con la función <code>mutate()</code> se crea una nueva columna en un data.frame. Ahora bien, la creación de una nueva columna dependerá del nombre que se le asigne: si se le asigna un nombre nuevo - o sea, diferente al de las demás columnas presentes en el data.frame -, se creará una columna nueva; si se nombra la columna con un nombre ya existente, se sustituirán los valores de dicha columna por los especificados en la función. Con la función <code>mutate()</code> se le indica a R que se desea crear una nueva columna <strong>genero</strong> basada en la actual columna <strong>genero</strong>. Luego con la función <code>recode_factor()</code> se indica que esta nueva columna <strong>genero</strong> contiene los valores pasados de <strong>genero</strong> sustituidos todos por <em>Psychilis</em>.</p>
+<p>Otra cosa que se podría arreglar en este data.frame, por cuestiones de comodidad, es el nombre de las columnas. El nombre de las columnas <em>numero_de_hojas</em> y <em>numero_de_frutos</em> es muy largo, y aunque esto no representa un problema para el análisis, es mucho más conveniente que los nombres de las columnas sean cortos. Los nombres cortos ayudan a la hora de escribir el código. Las función <code>rename()</code> puede ayudar a cambiar el nombre de las variables.</p>
+<p>Preste especial atención a la sintaxis del código. En el caso de <code>recode_factor()</code>, primero se especifica el valor categórico que se desea re-codificar y luego el valor por el cuál se desea sustituir; mientras que en la función <code>rename()</code> primero se especifica el nombre que desea asignar y luego la columna a la cual quiere asignarle el nuevo nombre.</p>
+<pre class="r"><code>datos %&gt;%
+  mutate(genero = recode_factor(genero,
+                                &quot;Psichilis&quot; = &quot;Psychilis&quot;,
+                                &quot;Psychils&quot; = &quot;Psychilis&quot;,
+                                &quot;Pyschilis&quot; = &quot;Psychilis&quot;)) %&gt;% 
+  rename(num_hojas = numero_de_hojas,
+         num_frutos = numero_de_frutos)</code></pre>
+<pre><code>##       genero     especie plot huesped num_hojas num_frutos
+## 1  Psychilis      krugii    1    tree         2          0
+## 2  Psychilis kraenzlinii    1    tree         3          0
+## 3  Psychilis kraenzlinii    1   shrub         6         NA
+## 4  Psychilis      krugii    1    rock         5          0
+## 5  Psychilis      krugii    1   shrub         1          1
+## 6  Psychilis kraenzlinii    1    tree         3          1
+## 7  Psychilis      krugii    1    tree         2          0
+## 8  Psychilis kraenzlinii    1    tree         2          2
+## 9  Psychilis kraenzlinii    1    tree         4          0
+## 10 Psychilis kraenzlinii    1    rock         3          0
+## 11 Psychilis      krugii    2    rock        NA         NA
+## 12 Psychilis kraenzlinii    2   shrub         3          0
+## 13 Psychilis      krugii    2    tree         5          0
+## 14 Psychilis kraenzlinii    2    rock         2          0
+## 15 Psychilis      krugii    2    tree         4          1
+## 16 Psychilis      krugii    2    tree         1          1
+## 17 Psychilis      krugii    2    tree         2          3
+## 18 Psychilis      krugii    2   shrub         7          0
+## 19 Psychilis kraenzlinii    2    &lt;NA&gt;         5          0
+## 20 Psychilis      krugii    2    tree         3          0
+## 21 Psychilis kraenzlinii    2   shrub         4          1
+## 22 Psychilis kraenzlinii    2    tree         2          0</code></pre>
+<p>Ahora que los datos están limpios, es conveniente guardar este grupo de datos en un objeto que se pueda seguir utilizando mientras se trabaje en la sesión corriente de R. En este caso se le llamará <em>datos_clean</em>:</p>
+<pre class="r"><code>datos_clean &lt;- datos %&gt;%
+  mutate(genero = recode_factor(genero,
+                                &quot;Psichilis&quot; = &quot;Psychilis&quot;,
+                                &quot;Psychils&quot; = &quot;Psychilis&quot;,
+                                &quot;Pyschilis&quot; = &quot;Psychilis&quot;)) %&gt;% 
+  rename(num_hojas = numero_de_hojas,
+         num_frutos = numero_de_frutos)</code></pre>
+<p>Es posible que se obtengan más datos de los necesarios. Por ejemplo, quizá ha conseguido datos para el género <em>Psychilis</em>, pero solo hay interés en una especie de este género, <em>Psychilis</em> <em>kraenzlinii</em>, y para llevar acabo el análisis es necesario eliminar los datos de las otras especies. Para esto <em>dplyr</em> provee la función <code>filter()</code>:</p>
+<pre class="r"><code>datos_clean %&gt;% 
+  filter(especie == &quot;kraenzlinii&quot;)</code></pre>
+<pre><code>##       genero     especie plot huesped num_hojas num_frutos
+## 1  Psychilis kraenzlinii    1    tree         3          0
+## 2  Psychilis kraenzlinii    1   shrub         6         NA
+## 3  Psychilis kraenzlinii    1    tree         3          1
+## 4  Psychilis kraenzlinii    1    tree         2          2
+## 5  Psychilis kraenzlinii    1    tree         4          0
+## 6  Psychilis kraenzlinii    1    rock         3          0
+## 7  Psychilis kraenzlinii    2   shrub         3          0
+## 8  Psychilis kraenzlinii    2    rock         2          0
+## 9  Psychilis kraenzlinii    2    &lt;NA&gt;         5          0
+## 10 Psychilis kraenzlinii    2   shrub         4          1
+## 11 Psychilis kraenzlinii    2    tree         2          0</code></pre>
+<p>Con esta función se le indica a R que sólo se desea trabajar con aquellas observaciones o líneas en las cuales la variable o columna <em>especie</em> es igual a <em>kraenzlinii</em>.</p>
+<p>Con los datos ya limpios, puede utilizar <em>dplyr</em> para obtener un poco de información a partir de los datos. Por ejemplo, se puede saber el promedio del número de hojas por parcela (<em>plot</em>) utilizando la combinación de funciones <code>group_by()</code> y <code>summarize()</code>. Estas funciones van de la mano, ya que <code>group_by()</code> indica que se desea agrupar los datos por cierta variable - en este caso por la variable <em>plot</em> -; mientras que la función <code>summarize()</code> indica cómo resumir las demás variables para poder agruparlas - en este caso, se resumirá en una columna, <em>prom_num_hojas</em>, que contiene el promedio de la columna <em>num_hojas</em>. Es decir, R calculará el promedio del número de hojas para cada parcela.</p>
+<pre class="r"><code>datos_clean %&gt;% 
+  filter(especie == &quot;kraenzlinii&quot;) %&gt;% 
+  group_by(plot) %&gt;% 
+  summarize(prom_num_hojas = mean(num_hojas))</code></pre>
+<pre><code>## # A tibble: 2 × 2
+##   plot  prom_num_hojas
+##   &lt;fct&gt;          &lt;dbl&gt;
+## 1 1                3.5
+## 2 2                3.2</code></pre>
+<p>De hecho, puede agrupar y resumir por cuantas variables considere necesario:</p>
+<pre class="r"><code>datos_clean %&gt;% 
+  group_by(genero, especie, plot) %&gt;% 
+  summarise(prom_num_hojas = mean(num_hojas),
+            total_frutos = sum(num_frutos))</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;genero&#39;, &#39;especie&#39;. You can override using
+## the `.groups` argument.</code></pre>
+<pre><code>## # A tibble: 4 × 5
+## # Groups:   genero, especie [2]
+##   genero    especie     plot  prom_num_hojas total_frutos
+##   &lt;fct&gt;     &lt;fct&gt;       &lt;fct&gt;          &lt;dbl&gt;        &lt;dbl&gt;
+## 1 Psychilis kraenzlinii 1                3.5           NA
+## 2 Psychilis kraenzlinii 2                3.2            1
+## 3 Psychilis krugii      1                2.5            1
+## 4 Psychilis krugii      2               NA             NA</code></pre>
+<p>Algo interesante que se puede notar es los valores perdidos (<em>NA</em>s) en las columnas <em>prom_num_hojas</em> y <em>total_frutos</em>. Esto se debe a que los datos originales contienen <em>NA</em>s y estos a su vez interfieren con el cálculo del promedio y la suma, pues no son números. Hay dos formas de en las que se puede trabajar con esto, y escoger entre una u otra va a depender de cuán imprescindibles son los datos faltantes. Por ejemplo, ya desde el principio se detectaron los <em>NA</em>s al hacer un resumen de los datos. Si la ética se lo permite, es decir, si la eliminación de aquellas observaciones que contienen datos faltantes no influye en el resultado final de la investigación, puede eliminar fácilmente todas las observaciones que contienen <em>NA</em>s de sus datos utilizando la función <code>filter()</code>:</p>
+<pre class="r"><code>datos_clean %&gt;% 
+  filter(!is.na(num_hojas), !is.na(num_frutos))</code></pre>
+<pre><code>##       genero     especie plot huesped num_hojas num_frutos
+## 1  Psychilis      krugii    1    tree         2          0
+## 2  Psychilis kraenzlinii    1    tree         3          0
+## 3  Psychilis      krugii    1    rock         5          0
+## 4  Psychilis      krugii    1   shrub         1          1
+## 5  Psychilis kraenzlinii    1    tree         3          1
+## 6  Psychilis      krugii    1    tree         2          0
+## 7  Psychilis kraenzlinii    1    tree         2          2
+## 8  Psychilis kraenzlinii    1    tree         4          0
+## 9  Psychilis kraenzlinii    1    rock         3          0
+## 10 Psychilis kraenzlinii    2   shrub         3          0
+## 11 Psychilis      krugii    2    tree         5          0
+## 12 Psychilis kraenzlinii    2    rock         2          0
+## 13 Psychilis      krugii    2    tree         4          1
+## 14 Psychilis      krugii    2    tree         1          1
+## 15 Psychilis      krugii    2    tree         2          3
+## 16 Psychilis      krugii    2   shrub         7          0
+## 17 Psychilis kraenzlinii    2    &lt;NA&gt;         5          0
+## 18 Psychilis      krugii    2    tree         3          0
+## 19 Psychilis kraenzlinii    2   shrub         4          1
+## 20 Psychilis kraenzlinii    2    tree         2          0</code></pre>
+<p>Con este código se le dice a R que filtre todo aquello que no es igual a <em>NA</em> (en el lenguaje de R, el signo de exclamación (!) significa <em>no es igual a</em>. La función <code>is.na()</code> evalúa cada una de las observaciones en la variable especificada para ver si es <em>NA.</em> Se puede guardar este nuevo grupo de datos en un nuevo objeto y aplicarle luego las funciones que quiera, o simplemente añadir una nueva línea de código para hacer la agrupación por especie y parcela, y el cálculo del promedio de número de hojas y total de frutos:</p>
+<pre class="r"><code>datos_clean %&gt;% 
+  filter(!is.na(num_hojas), !is.na(num_frutos)) %&gt;% 
+  group_by(genero, especie, plot) %&gt;% 
+  summarise(prom_num_hojas = mean(num_hojas, na.rm = T),
+            total_frutos = sum(num_frutos, na.rm = T))</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;genero&#39;, &#39;especie&#39;. You can override using
+## the `.groups` argument.</code></pre>
+<pre><code>## # A tibble: 4 × 5
+## # Groups:   genero, especie [2]
+##   genero    especie     plot  prom_num_hojas total_frutos
+##   &lt;fct&gt;     &lt;fct&gt;       &lt;fct&gt;          &lt;dbl&gt;        &lt;dbl&gt;
+## 1 Psychilis kraenzlinii 1               3               3
+## 2 Psychilis kraenzlinii 2               3.2             1
+## 3 Psychilis krugii      1               2.5             1
+## 4 Psychilis krugii      2               3.67            5</code></pre>
+<p>OJO: Este método elimina la observación completa del data.frame.<br />
+</p>
+<p>Si fuera preferible no eliminar datos, la otra opción para trabajar los datos faltantes es especificarle a R que remueva los <em>NA</em> cuando esté llevando a cabo el cálculo del promedio de número de hojas y el número total de frutos estableciendo el parámetro <code>na.rm</code> como cierto:</p>
+<pre class="r"><code>datos_clean %&gt;% 
+  group_by(genero, especie, plot) %&gt;% 
+  summarise(prom_num_hojas = mean(num_hojas, na.rm = T),
+            total_frutos = sum(num_frutos, na.rm = T))</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;genero&#39;, &#39;especie&#39;. You can override using
+## the `.groups` argument.</code></pre>
+<pre><code>## # A tibble: 4 × 5
+## # Groups:   genero, especie [2]
+##   genero    especie     plot  prom_num_hojas total_frutos
+##   &lt;fct&gt;     &lt;fct&gt;       &lt;fct&gt;          &lt;dbl&gt;        &lt;dbl&gt;
+## 1 Psychilis kraenzlinii 1               3.5             3
+## 2 Psychilis kraenzlinii 2               3.2             1
+## 3 Psychilis krugii      1               2.5             1
+## 4 Psychilis krugii      2               3.67            5</code></pre>
+<p>De esta forma conserva la línea que contiene la observación, sólo la ignora a la hora de calcular el promedio.<br />
+</p>
+<p>Para culminar, quizá notó que durante el taller no se utilizó la variable de <em>huesped</em>. Es posible obtener un grupo de datos que contiene más variables de las que necesitamos y, si la cantidad de variables es muy grande, esto podría representar una molestia a la hora de hacer el resumen de los datos o a la hora de observar los datos en una tabla en su totalidad. La función <code>select()</code> permite seleccionar aquellas variables de interés, eliminando aquellas que representan un tropiezo. Puede seleccionar una sola variable:</p>
+<pre class="r"><code>datos_clean %&gt;% 
+  select(especie)</code></pre>
+<pre><code>##        especie
+## 1       krugii
+## 2  kraenzlinii
+## 3  kraenzlinii
+## 4       krugii
+## 5       krugii
+## 6  kraenzlinii
+## 7       krugii
+## 8  kraenzlinii
+## 9  kraenzlinii
+## 10 kraenzlinii
+## 11      krugii
+## 12 kraenzlinii
+## 13      krugii
+## 14 kraenzlinii
+## 15      krugii
+## 16      krugii
+## 17      krugii
+## 18      krugii
+## 19 kraenzlinii
+## 20      krugii
+## 21 kraenzlinii
+## 22 kraenzlinii</code></pre>
+<p>O seleccionar varias variables:</p>
+<pre class="r"><code>datos_clean %&gt;% 
+  select(especie, num_hojas, num_frutos)</code></pre>
+<pre><code>##        especie num_hojas num_frutos
+## 1       krugii         2          0
+## 2  kraenzlinii         3          0
+## 3  kraenzlinii         6         NA
+## 4       krugii         5          0
+## 5       krugii         1          1
+## 6  kraenzlinii         3          1
+## 7       krugii         2          0
+## 8  kraenzlinii         2          2
+## 9  kraenzlinii         4          0
+## 10 kraenzlinii         3          0
+## 11      krugii        NA         NA
+## 12 kraenzlinii         3          0
+## 13      krugii         5          0
+## 14 kraenzlinii         2          0
+## 15      krugii         4          1
+## 16      krugii         1          1
+## 17      krugii         2          3
+## 18      krugii         7          0
+## 19 kraenzlinii         5          0
+## 20      krugii         3          0
+## 21 kraenzlinii         4          1
+## 22 kraenzlinii         2          0</code></pre>
+<p>La selección de varias variables puede llevarse acabo como en el código anterior entrando el nombre de las variables de interés a mano, o puede seleccionar desde la variable <em>x</em> hasta la variable <em>y</em> utilizando los dos puntos (<em>:</em>):</p>
+<pre class="r"><code>datos_clean %&gt;% 
+  select(genero:huesped)</code></pre>
+<pre><code>##       genero     especie plot huesped
+## 1  Psychilis      krugii    1    tree
+## 2  Psychilis kraenzlinii    1    tree
+## 3  Psychilis kraenzlinii    1   shrub
+## 4  Psychilis      krugii    1    rock
+## 5  Psychilis      krugii    1   shrub
+## 6  Psychilis kraenzlinii    1    tree
+## 7  Psychilis      krugii    1    tree
+## 8  Psychilis kraenzlinii    1    tree
+## 9  Psychilis kraenzlinii    1    tree
+## 10 Psychilis kraenzlinii    1    rock
+## 11 Psychilis      krugii    2    rock
+## 12 Psychilis kraenzlinii    2   shrub
+## 13 Psychilis      krugii    2    tree
+## 14 Psychilis kraenzlinii    2    rock
+## 15 Psychilis      krugii    2    tree
+## 16 Psychilis      krugii    2    tree
+## 17 Psychilis      krugii    2    tree
+## 18 Psychilis      krugii    2   shrub
+## 19 Psychilis kraenzlinii    2    &lt;NA&gt;
+## 20 Psychilis      krugii    2    tree
+## 21 Psychilis kraenzlinii    2   shrub
+## 22 Psychilis kraenzlinii    2    tree</code></pre>
+<p>O puede seleccionar todas las variables menos las variables especificadas. En este caso, la variable <em>huesped</em> no es importante para la investigación, así que se puede seleccionar todas las variables menos esta utilizando el signo de exclamación (<em>!</em>) como lo hicimos anteriormente con la función<code>filter()</code>:</p>
+<pre class="r"><code>datos_clean %&gt;% 
+  select(!huesped)</code></pre>
+<pre><code>##       genero     especie plot num_hojas num_frutos
+## 1  Psychilis      krugii    1         2          0
+## 2  Psychilis kraenzlinii    1         3          0
+## 3  Psychilis kraenzlinii    1         6         NA
+## 4  Psychilis      krugii    1         5          0
+## 5  Psychilis      krugii    1         1          1
+## 6  Psychilis kraenzlinii    1         3          1
+## 7  Psychilis      krugii    1         2          0
+## 8  Psychilis kraenzlinii    1         2          2
+## 9  Psychilis kraenzlinii    1         4          0
+## 10 Psychilis kraenzlinii    1         3          0
+## 11 Psychilis      krugii    2        NA         NA
+## 12 Psychilis kraenzlinii    2         3          0
+## 13 Psychilis      krugii    2         5          0
+## 14 Psychilis kraenzlinii    2         2          0
+## 15 Psychilis      krugii    2         4          1
+## 16 Psychilis      krugii    2         1          1
+## 17 Psychilis      krugii    2         2          3
+## 18 Psychilis      krugii    2         7          0
+## 19 Psychilis kraenzlinii    2         5          0
+## 20 Psychilis      krugii    2         3          0
+## 21 Psychilis kraenzlinii    2         4          1
+## 22 Psychilis kraenzlinii    2         2          0</code></pre>
+<p>Estas son sólo algunas funciones que se encuentran en el paquete <em>dplyr</em> que ayudan con la limpieza y manejo de datos. Las posibilidades aumentan aún más cuando se combina este paquete con otros como <em>tidyr</em> o <em>forcats</em>. El paquete <em>tidyverse</em>, por ejemplo,es un paquete compuesto de paquetes dirigidos a la ciencia de datos, paquetes que ayudan con la limpieza, manejo, visualización y modelaje de datos.</p>
+</div>
+<div id="anuncio-del-taller" class="section level3">
+<h3>Anuncio del taller</h3>
+<div class="figure">
+<img src="Fliers/Dplyr%20flier%2022.png" alt="" />
+<p class="caption">Manejo de Datos con dplyr</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -17,8 +17,8 @@ output:
 
 - Dia del Taller: el 13 de enero, 2022
 - Recurso: Jeffrey Chan Santiago, Estudiante Graduado
-- Associación Académida: **Universidad de Puerto Rico - Rio Piedras**
-- Correo ellectornico: jeffrey.chan@upr.edu
+- Asociación Académida: **Universidad de Puerto Rico - Rio Piedras**
+- Correo electronico: jeffrey.chan@upr.edu
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)

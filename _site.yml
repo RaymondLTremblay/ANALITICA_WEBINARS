@@ -16,6 +16,9 @@ navbar:
         - 
           href: Intro-to-ggplot2.html
           text: 'Introducción a ggplot2'
+        - 
+          href: dplyr-workshop.html
+          text: 'Manipulaciones de datos con dplyr'        
           
         - 
           href: Mapas_Interactivos_con_Leaflet.html
@@ -36,6 +39,10 @@ navbar:
         - 
           href: Ecuaciones_Estructurales.html
           text: 'Ecuaciones Estructurales'
+        - 
+          href: metodos_estadisticos-robustos.html
+          text: 'Métodos Estadísticos Robustos'     
+          
       text: "Estadística y Modelos"
   title: "ANALITICA Fundación Webinars"
 output_dir: "."

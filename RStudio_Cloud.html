@@ -13,7 +13,7 @@
 
 <title>RStudio Cloud</title>
 
-<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -49,6 +49,7 @@
 
 
 
+
 <link rel="stylesheet" href="ANALITICA_WEB.css" type="text/css" />
 
 
@@ -73,6 +74,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -301,7 +305,7 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -314,7 +318,7 @@ div.tocify {
   <a href="Descripcion.html">Calendario</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     RStudio
      
     <span class="caret"></span>
@@ -330,12 +334,15 @@ div.tocify {
       <a href="Intro-to-ggplot2.html">Introducción a ggplot2</a>
     </li>
     <li>
+      <a href="dplyr-workshop.html">Manipulaciones de datos con dplyr</a>
+    </li>
+    <li>
       <a href="Mapas_Interactivos_con_Leaflet.html">Mapas Interactivos con Leaflet</a>
     </li>
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Python
      
     <span class="caret"></span>
@@ -347,7 +354,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Estadística y Modelos
      
     <span class="caret"></span>
@@ -358,6 +365,9 @@ div.tocify {
     </li>
     <li>
       <a href="Ecuaciones_Estructurales.html">Ecuaciones Estructurales</a>
+    </li>
+    <li>
+      <a href="metodos_estadisticos-robustos.html">Métodos Estadísticos Robustos</a>
     </li>
   </ul>
 </li>
@@ -372,7 +382,7 @@ div.tocify {
 <div id="header">
 
 <div class="btn-group pull-right float-right">
-<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
 <ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
 <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
 <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
@@ -392,8 +402,8 @@ div.tocify {
 <ul>
 <li>Dia del Taller: el 21 de octubre, 2021</li>
 <li>Recurso: Dr. Denny Fernandez del Viso, PhD</li>
-<li>Associación Académida: <strong>Universidad de Puerto Rico - Humacao</strong></li>
-<li>Correo ellectornico: <a href="mailto:dsfernandez@gmail.com" class="email">dsfernandez@gmail.com</a></li>
+<li>Asociación Académida: <strong>Universidad de Puerto Rico - Humacao</strong></li>
+<li>Correo electronico: <a href="mailto:dsfernandez@gmail.com" class="email">dsfernandez@gmail.com</a></li>
 </ul>
 <hr />
 <div id="qué-es-rstudio-cloud" class="section level2">

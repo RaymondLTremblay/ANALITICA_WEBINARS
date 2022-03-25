@@ -1,0 +1,74 @@
+---
+title: "Metodos_estadisticos_robustos"
+output:
+  html_document:
+    css: ANALITICA_WEB.css
+    fig_caption: yes
+    highlight: pygments
+    toc: yes
+    toc_float: yes
+    code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+***
+
+# Introducción a Meetodos Estadisticos Robustos
+
+- Dia del Taller: el 10 de marzo, 2022
+- Recurso: Ricardo Morenna, PhD
+- Asociación Académida: **Universidad de la Plata, Argentina**
+- Correo electronico: rmaronna@retina.ar
+
+
+***
+
+## Presentación Power point de la activcidad
+
+[La presentación](Presentaciones/Maronna_Webinar-03-22.pdf) 
+
+
+
+
+
+***
+
+## Video de la Presentación
+
+# Enlaces para acceso a los Videos en el Canal de YOUTUBE ANALITICA Fundación
+
+Los sigientes enlaces corresponde a la presentación abajo
+
+[Video_1]()
+
+[Video_2]()
+
+[Video_3]()
+
+[Video_4]()
+
+
+***
+
+
+
+
+
+
+## Recursos Suplementario
+
+Recursos disponible sobre Métodos Estadísticos Robustos
+
+[Enlace al nuevo libro del Dr. Morenna en español](https://www.ic.fcen.uba.ar/noticias/nuevo-libro-de-ricardo-maronna)
+
+[Libro en Amazon](https://www.amazon.com/dp/1119214688/ref=cm_sw_em_r_mt_dp_E6EMSVK1HC94BW60RCNC)
+
+
+
+### Anuncio del taller
+
+
+![Métodos Estadísticos Robustos](Fliers/Metodos_Robustos.png)

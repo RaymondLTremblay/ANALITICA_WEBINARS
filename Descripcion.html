@@ -13,7 +13,7 @@
 
 <title>Descripción</title>
 
-<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -43,6 +43,7 @@
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
     </style>
+
 
 
 <style type="text/css">
@@ -177,6 +178,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -405,7 +409,7 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -418,7 +422,7 @@ div.tocify {
   <a href="Descripcion.html">Calendario</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     RStudio
      
     <span class="caret"></span>
@@ -434,12 +438,15 @@ div.tocify {
       <a href="Intro-to-ggplot2.html">Introducción a ggplot2</a>
     </li>
     <li>
+      <a href="dplyr-workshop.html">Manipulaciones de datos con dplyr</a>
+    </li>
+    <li>
       <a href="Mapas_Interactivos_con_Leaflet.html">Mapas Interactivos con Leaflet</a>
     </li>
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Python
      
     <span class="caret"></span>
@@ -451,7 +458,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Estadística y Modelos
      
     <span class="caret"></span>
@@ -462,6 +469,9 @@ div.tocify {
     </li>
     <li>
       <a href="Ecuaciones_Estructurales.html">Ecuaciones Estructurales</a>
+    </li>
+    <li>
+      <a href="metodos_estadisticos-robustos.html">Métodos Estadísticos Robustos</a>
     </li>
   </ul>
 </li>
@@ -476,7 +486,7 @@ div.tocify {
 <div id="header">
 
 <div class="btn-group pull-right float-right">
-<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
 <ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
 <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
 <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
@@ -491,7 +501,7 @@ div.tocify {
 
 
 <p>Fecha de la ultima revisión</p>
-<pre><code>## [1] &quot;2022-02-20&quot;</code></pre>
+<pre><code>## [1] &quot;2022-03-25&quot;</code></pre>
 <hr />
 <div id="analitca-webinars" class="section level1">
 <h1>ANALITCA WEBINARS</h1>
@@ -506,19 +516,21 @@ div.tocify {
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>calendario<span class="ot">=</span><span class="fu">tribble</span>(</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>Fecha, <span class="sc">~</span>Año, <span class="sc">~</span>Tema, <span class="sc">~</span>Recurso,</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;9 de septiembre&quot;</span>, <span class="dv">2021</span>, <span class="st">&quot;Introducción a RMarkdown&quot;</span>, <span class="st">&quot;Raymond L. Tremblay, PhD&quot;</span>,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;21 de octubre&quot;</span>, <span class="dv">2021</span>, <span class="st">&quot;Introducción a RStudio Cloud&quot;</span>, <span class="st">&quot;Denny Fernandez del Viso, PhD&quot;</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;21 de octubre&quot;</span>, <span class="dv">2021</span>, <span class="st">&quot;Introducción a RStudio Cloud&quot;</span>, <span class="st">&quot;Denny Fernández del Viso, PhD&quot;</span>,</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;11 de novienbre&quot;</span>, <span class="dv">2021</span>, <span class="st">&quot;Introducción a ggplot2&quot;</span>, <span class="st">&quot;Marijulie Martinez-Lozano, DrPH&quot;</span>,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;9 de diciembre&quot;</span>, <span class="dv">2021</span>, <span class="st">&quot;Introducción a al paquete Leaflet&quot;</span>, <span class="st">&quot;Normandie Gonzalez, Estudiante graduada&quot;</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;9 de diciembre&quot;</span>, <span class="dv">2021</span>, <span class="st">&quot;Introducción a al paquete Leaflet&quot;</span>, <span class="st">&quot;Normandie González, Estudiante graduada&quot;</span>,</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;13 de enero&quot;</span>, <span class="dv">2022</span>, <span class="st">&quot;Introducción a Machine Learning&quot;</span>, <span class="st">&quot;Jeffrey Chan, Estudiante graduado&quot;</span>,</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;10 de febrero&quot;</span>, <span class="dv">2022</span>, <span class="st">&quot;Ecuaciones Estructurales&quot;</span>, <span class="st">&quot;Ernesto Rosario Hernández, PhD&quot;</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">gt</span>(calendario)</span></code></pre></div>
-<div id="tkekngfnci" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;10 de febrero&quot;</span>, <span class="dv">2022</span>, <span class="st">&quot;Ecuaciones Estructurales&quot;</span>, <span class="st">&quot;Ernesto Rosario Hernández, PhD&quot;</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;10 de marzo&quot;</span>, <span class="dv">2022</span>, <span class="st">&quot;Métodos estadísticos robustos&quot;</span>, <span class="st">&quot;Ricardo Morenna, PhD&quot;</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;14 de abril&quot;</span>, <span class="dv">2022</span>, <span class="st">&quot;Regresiones beta&quot;</span>, <span class="st">&quot;Raymond L. Tremblay, PhD&quot;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">gt</span>(calendario)</span></code></pre></div>
+<div id="egkqdwlbuw" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#tkekngfnci .gt_table {
+#egkqdwlbuw .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -543,7 +555,7 @@ div.tocify {
   border-left-color: #D3D3D3;
 }
 
-#tkekngfnci .gt_heading {
+#egkqdwlbuw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -555,33 +567,37 @@ div.tocify {
   border-right-color: #D3D3D3;
 }
 
-#tkekngfnci .gt_title {
+#egkqdwlbuw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
   padding-top: 4px;
   padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
   border-bottom-color: #FFFFFF;
   border-bottom-width: 0;
 }
 
-#tkekngfnci .gt_subtitle {
+#egkqdwlbuw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
   padding-top: 0;
   padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
   border-top-color: #FFFFFF;
   border-top-width: 0;
 }
 
-#tkekngfnci .gt_bottom_border {
+#egkqdwlbuw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tkekngfnci .gt_col_headings {
+#egkqdwlbuw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -596,7 +612,7 @@ div.tocify {
   border-right-color: #D3D3D3;
 }
 
-#tkekngfnci .gt_col_heading {
+#egkqdwlbuw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -616,7 +632,7 @@ div.tocify {
   overflow-x: hidden;
 }
 
-#tkekngfnci .gt_column_spanner_outer {
+#egkqdwlbuw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -628,15 +644,15 @@ div.tocify {
   padding-right: 4px;
 }
 
-#tkekngfnci .gt_column_spanner_outer:first-child {
+#egkqdwlbuw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tkekngfnci .gt_column_spanner_outer:last-child {
+#egkqdwlbuw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tkekngfnci .gt_column_spanner {
+#egkqdwlbuw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -648,8 +664,11 @@ div.tocify {
   width: 100%;
 }
 
-#tkekngfnci .gt_group_heading {
-  padding: 8px;
+#egkqdwlbuw .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -670,7 +689,7 @@ div.tocify {
   vertical-align: middle;
 }
 
-#tkekngfnci .gt_empty_group_heading {
+#egkqdwlbuw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -685,15 +704,15 @@ div.tocify {
   vertical-align: middle;
 }
 
-#tkekngfnci .gt_from_md > :first-child {
+#egkqdwlbuw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tkekngfnci .gt_from_md > :last-child {
+#egkqdwlbuw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tkekngfnci .gt_row {
+#egkqdwlbuw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -712,7 +731,7 @@ div.tocify {
   overflow-x: hidden;
 }
 
-#tkekngfnci .gt_stub {
+#egkqdwlbuw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -721,10 +740,29 @@ div.tocify {
   border-right-style: solid;
   border-right-width: 2px;
   border-right-color: #D3D3D3;
-  padding-left: 12px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
-#tkekngfnci .gt_summary_row {
+#egkqdwlbuw .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#egkqdwlbuw .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#egkqdwlbuw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -734,17 +772,26 @@ div.tocify {
   padding-right: 5px;
 }
 
-#tkekngfnci .gt_first_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
+#egkqdwlbuw .gt_first_summary_row {
   border-top-style: solid;
-  border-top-width: 2px;
   border-top-color: #D3D3D3;
 }
 
-#tkekngfnci .gt_grand_summary_row {
+#egkqdwlbuw .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#egkqdwlbuw .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#egkqdwlbuw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -754,7 +801,7 @@ div.tocify {
   padding-right: 5px;
 }
 
-#tkekngfnci .gt_first_grand_summary_row {
+#egkqdwlbuw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -764,11 +811,11 @@ div.tocify {
   border-top-color: #D3D3D3;
 }
 
-#tkekngfnci .gt_striped {
+#egkqdwlbuw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tkekngfnci .gt_table_body {
+#egkqdwlbuw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -777,7 +824,7 @@ div.tocify {
   border-bottom-color: #D3D3D3;
 }
 
-#tkekngfnci .gt_footnotes {
+#egkqdwlbuw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -791,13 +838,16 @@ div.tocify {
   border-right-color: #D3D3D3;
 }
 
-#tkekngfnci .gt_footnote {
+#egkqdwlbuw .gt_footnote {
   margin: 0px;
   font-size: 90%;
-  padding: 4px;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
-#tkekngfnci .gt_sourcenotes {
+#egkqdwlbuw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -811,44 +861,71 @@ div.tocify {
   border-right-color: #D3D3D3;
 }
 
-#tkekngfnci .gt_sourcenote {
+#egkqdwlbuw .gt_sourcenote {
   font-size: 90%;
-  padding: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
-#tkekngfnci .gt_left {
+#egkqdwlbuw .gt_left {
   text-align: left;
 }
 
-#tkekngfnci .gt_center {
+#egkqdwlbuw .gt_center {
   text-align: center;
 }
 
-#tkekngfnci .gt_right {
+#egkqdwlbuw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tkekngfnci .gt_font_normal {
+#egkqdwlbuw .gt_font_normal {
   font-weight: normal;
 }
 
-#tkekngfnci .gt_font_bold {
+#egkqdwlbuw .gt_font_bold {
   font-weight: bold;
 }
 
-#tkekngfnci .gt_font_italic {
+#egkqdwlbuw .gt_font_italic {
   font-style: italic;
 }
 
-#tkekngfnci .gt_super {
+#egkqdwlbuw .gt_super {
   font-size: 65%;
 }
 
-#tkekngfnci .gt_footnote_marks {
+#egkqdwlbuw .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
-  font-size: 65%;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#egkqdwlbuw .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#egkqdwlbuw .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
+}
+
+#egkqdwlbuw .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
+}
+
+#egkqdwlbuw .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
 }
 </style>
 <table class="gt_table">
@@ -869,7 +946,7 @@ div.tocify {
     <tr><td class="gt_row gt_left">21 de octubre</td>
 <td class="gt_row gt_right">2021</td>
 <td class="gt_row gt_left">Introducción a RStudio Cloud</td>
-<td class="gt_row gt_left">Denny Fernandez del Viso, PhD</td></tr>
+<td class="gt_row gt_left">Denny Fernández del Viso, PhD</td></tr>
     <tr><td class="gt_row gt_left">11 de novienbre</td>
 <td class="gt_row gt_right">2021</td>
 <td class="gt_row gt_left">Introducción a ggplot2</td>
@@ -877,7 +954,7 @@ div.tocify {
     <tr><td class="gt_row gt_left">9 de diciembre</td>
 <td class="gt_row gt_right">2021</td>
 <td class="gt_row gt_left">Introducción a al paquete Leaflet</td>
-<td class="gt_row gt_left">Normandie Gonzalez, Estudiante graduada</td></tr>
+<td class="gt_row gt_left">Normandie González, Estudiante graduada</td></tr>
     <tr><td class="gt_row gt_left">13 de enero</td>
 <td class="gt_row gt_right">2022</td>
 <td class="gt_row gt_left">Introducción a Machine Learning</td>
@@ -886,6 +963,14 @@ div.tocify {
 <td class="gt_row gt_right">2022</td>
 <td class="gt_row gt_left">Ecuaciones Estructurales</td>
 <td class="gt_row gt_left">Ernesto Rosario Hernández, PhD</td></tr>
+    <tr><td class="gt_row gt_left">10 de marzo</td>
+<td class="gt_row gt_right">2022</td>
+<td class="gt_row gt_left">Métodos estadísticos robustos</td>
+<td class="gt_row gt_left">Ricardo Morenna, PhD</td></tr>
+    <tr><td class="gt_row gt_left">14 de abril</td>
+<td class="gt_row gt_right">2022</td>
+<td class="gt_row gt_left">Regresiones beta</td>
+<td class="gt_row gt_left">Raymond L. Tremblay, PhD</td></tr>
   </tbody>
   
   

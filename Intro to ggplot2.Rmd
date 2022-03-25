@@ -20,8 +20,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 - Dia del Taller: el 11 de noviembre, 2021
 - Recurso: Marijulie Martinez-Lozano, DrPH
-- Associación Académida: **???**
-- Correo ellectornico: marijulie.martinez@upr.edu
+- Asociación Académida: **Universidad de Puerto Rico Recinto de Ciencia Médica**
+- Correo electronico: marijulie.martinez@upr.edu
 
 
 ***

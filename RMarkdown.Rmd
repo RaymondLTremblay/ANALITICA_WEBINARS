@@ -13,12 +13,12 @@ output:
 
 ***
 
-# Introducción a Ecuaciones Estructurales
+# Introducción a RMarkdown
 
 - Dia del Taller: el 10 de febrero, 2022
 - Recurso: Raymond L. Tremblay, PhD
-- Associación Académida: **Universidad de Puerto Rico - Humacao**
-- Correo ellectornico: raymondtremblay@upr.edu
+- Asociación Académida: **Universidad de Puerto Rico - Humacao**
+- Correo electronico: raymondtremblay@upr.edu
 
 
 

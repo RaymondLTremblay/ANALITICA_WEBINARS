@@ -17,8 +17,8 @@ output:
 
 - Dia del Taller: el 9 de diciembre, 2021
 - Recurso: Normandie Gonzalez_Orrelana
-- Associación Académida: **Universidad de Puerto Rico- Rio Piedras, Estudiante Graduada**
-- Correo ellectornico: normandie.gonzalez@upr.edu
+- Asociación Académida: **Universidad de Puerto Rico- Rio Piedras, Estudiante Graduada**
+- Correo electronico: normandie.gonzalez@upr.edu
 
 
 ***
