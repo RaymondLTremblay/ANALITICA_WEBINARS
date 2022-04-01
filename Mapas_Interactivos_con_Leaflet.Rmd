@@ -23,16 +23,11 @@ output:
 
 ***
 
-## ¿Mapas Interactivos con **Leaflet**?
-
- > 
-
-
-***
-
 ## Video de la Presentación
 
-# Enlaces para acceso a los Videos en el Canal de YOUTUBE ANALITICA Fundación
+### YOUTUBE ANALITICA Fundación
+
+ - Enlaces para acceso a los Videos en el Canal de 
 
 Los sigientes enlaces corresponde a la presentación abajo
 
@@ -56,7 +51,7 @@ text-align: justify}
 
 # Importación de Paquetes y Datos
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 library(tidyverse)
 library(leaflet)
 library(rinat)
