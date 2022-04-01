@@ -1,11 +1,14 @@
 ---
 title: 'Taller Manejo de Datos: Un Vistazo al paquete dplyr'
-author: "Normandie González-Orellana"
-date: "8/24/2021"
-output: html_document
-header-includes:
-  - \usepackage{caption}
-  - \captionsetup{font=Huge}
+output:
+  html_document:
+    css: ANALITICA_WEB.css
+    fig_caption: yes
+    highlight: pygments
+#  theme: simplex   To have the TOC in Red
+    toc: yes
+    toc_float: yes
+    code_folding: hide
 ---
 
 ```{r setup, include=FALSE}
@@ -49,12 +52,12 @@ Los sigientes enlaces corresponde a la presentación abajo
 
 
 
-## Recursos Suplementario
+## Recursos necesario para el taller
 
 
 Encontrarán el archivo de datos en el siguiente [enlace](DATA/PsychilisFALSE.xlsx)
 
-
+***
 
 
 ### El Proceso de la Ciencia de Datos
@@ -76,6 +79,9 @@ La Ciencia de Datos es una disciplina amplia y multidisciplinaria que combina el
 -   **Publicación:** Una vez seguro de que su modelo se ajusta bien a los datos, ha sido entrenado correctamente, y ha obtenido resultados, fiel al método científico, toca la publicación de los hallazgos. En el caso de un científico de datos, esto puede ser a través de una publicación en una revista científica, al público en general a través de la prensa, en una presentación en una conferencia, o simplemente escribiendo un reporte interno para la compañía o institución para la cuál trabaja.
 
 En este taller nos concentraremos en la limpieza de datos. Presentaremos el paquete *dplyr* y algunas de sus funciones que son útiles para la limpieza y manejo de datos.
+
+
+***
 
 ### Manejo de Datos con *dplyr*
 
@@ -113,11 +119,19 @@ kbl(datos, caption = "<b>Tabla 1:</b> Datos obtenidos apartir de observación en
            general_title = "*", footnote_as_chunk = T)
 ```
 
+
 Los datos de la tabla 1 contienen 6 variables y 22 observaciones. Las primeras 4 variables son factoriales y las últimas dos son numéricas. Una forma sencilla de saber qué tipo de variables tiene un grupo de datos es con la función `summary()`:
+
+
+***
+## Resumiendo los datos
 
 ```{r}
 summary(datos)
 ```
+
+***
+## Resolviendo errores tipográficos o cambio de nombre de variable
 
 Pedirle un resumen de los datos a R con esta función quizá sea el mejor paso luego de importar los datos, pues nos permite tener una idea de la estructura de los datos y en ocasiones detectar errores rápidamente. Por ejemplo, en estos datos sólo se trabaja con un género de orquídeas, pero R está registrando 4; y con 2 especies, pero R está registrando 3. Esto se debe a errores ortográficos a la hora de la recolección y/o entrada de datos. Los errores ortográficos o la poca consistencia en la toma de datos es uno de los retos más comunes en la ciencia de datos. Los lenguajes de programación como R son sensitivos a la ortografía, y errores como este pueden afectar el análisis de los datos. El paquete *dplyr* y sus funciones `mutate()` y `recode()` pueden ayudar a resolver este asunto:
 
@@ -132,7 +146,11 @@ datos %>%
                                 "Pyschilis" = "Psychilis"))
 ```
 
+
 Con la función `mutate()` se crea una nueva columna en un data.frame. Ahora bien, la creación de una nueva columna dependerá del nombre que se le asigne: si se le asigna un nombre nuevo - o sea, diferente al de las demás columnas presentes en el data.frame -, se creará una columna nueva; si se nombra la columna con un nombre ya existente, se sustituirán los valores de dicha columna por los especificados en la función. Con la función `mutate()` se le indica a R que se desea crear una nueva columna **genero** basada en la actual columna **genero**. Luego con la función `recode_factor()` se indica que esta nueva columna **genero** contiene los valores pasados de **genero** sustituidos todos por *Psychilis*.
+
+***
+## rename
 
 Otra cosa que se podría arreglar en este data.frame, por cuestiones de comodidad, es el nombre de las columnas. El nombre de las columnas *numero_de_hojas* y *numero_de_frutos* es muy largo, y aunque esto no representa un problema para el análisis, es mucho más conveniente que los nombres de las columnas sean cortos. Los nombres cortos ayudan a la hora de escribir el código. Las función `rename()` puede ayudar a cambiar el nombre de las variables.
 
@@ -148,6 +166,10 @@ datos %>%
          num_frutos = numero_de_frutos)
 ```
 
+***
+
+## Guardar los datos en un nuevo objeto
+
 Ahora que los datos están limpios, es conveniente guardar este grupo de datos en un objeto que se pueda seguir utilizando mientras se trabaje en la sesión corriente de R. En este caso se le llamará *datos_clean*:
 
 ```{r}
@@ -160,6 +182,9 @@ datos_clean <- datos %>%
          num_frutos = numero_de_frutos)
 ```
 
+***
+## Filtrar datos
+
 Es posible que se obtengan más datos de los necesarios. Por ejemplo, quizá ha conseguido datos para el género *Psychilis*, pero solo hay interés en una especie de este género, *Psychilis* *kraenzlinii*, y para llevar acabo el análisis es necesario eliminar los datos de las otras especies. Para esto *dplyr* provee la función `filter()`:
 
 ```{r}
@@ -169,6 +194,10 @@ datos_clean %>%
 
 Con esta función se le indica a R que sólo se desea trabajar con aquellas observaciones o líneas en las cuales la variable o columna *especie* es igual a *kraenzlinii*.
 
+***
+
+## Resumiendo datos y calculando parametros
+
 Con los datos ya limpios, puede utilizar *dplyr* para obtener un poco de información a partir de los datos. Por ejemplo, se puede saber el promedio del número de hojas por parcela (*plot*) utilizando la combinación de funciones `group_by()` y `summarize()`. Estas funciones van de la mano, ya que `group_by()` indica que se desea agrupar los datos por cierta variable - en este caso por la variable *plot* -; mientras que la función `summarize()` indica cómo resumir las demás variables para poder agruparlas - en este caso, se resumirá en una columna, *prom_num_hojas*, que contiene el promedio de la columna *num_hojas*. Es decir, R calculará el promedio del número de hojas para cada parcela.
 
 ```{r}
@@ -177,6 +206,8 @@ datos_clean %>%
   group_by(plot) %>% 
   summarize(prom_num_hojas = mean(num_hojas))
 ```
+***
+## Resumiendo por multiple grupos
 
 De hecho, puede agrupar y resumir por cuantas variables considere necesario:
 
@@ -186,6 +217,10 @@ datos_clean %>%
   summarise(prom_num_hojas = mean(num_hojas),
             total_frutos = sum(num_frutos))
 ```
+
+***
+
+## Excluyendo los NA
 
 Algo interesante que se puede notar es los valores perdidos (*NA*s) en las columnas *prom_num_hojas* y *total_frutos*. Esto se debe a que los datos originales contienen *NA*s y estos a su vez interfieren con el cálculo del promedio y la suma, pues no son números. Hay dos formas de en las que se puede trabajar con esto, y escoger entre una u otra va a depender de cuán imprescindibles son los datos faltantes. Por ejemplo, ya desde el principio se detectaron los *NA*s al hacer un resumen de los datos. Si la ética se lo permite, es decir, si la eliminación de aquellas observaciones que contienen datos faltantes no influye en el resultado final de la investigación, puede eliminar fácilmente todas las observaciones que contienen *NA*s de sus datos utilizando la función `filter()`:
 
@@ -204,7 +239,12 @@ datos_clean %>%
             total_frutos = sum(num_frutos, na.rm = T))
 ```
 
-OJO: Este método elimina la observación completa del data.frame.\
+
+**OJO: Este método elimina la observación completa del data.frame**
+
+***
+
+## na.rm
 
 Si fuera preferible no eliminar datos, la otra opción para trabajar los datos faltantes es especificarle a R que remueva los *NA* cuando esté llevando a cabo el cálculo del promedio de número de hojas y el número total de frutos estableciendo el parámetro `na.rm` como cierto:
 
@@ -214,6 +254,9 @@ datos_clean %>%
   summarise(prom_num_hojas = mean(num_hojas, na.rm = T),
             total_frutos = sum(num_frutos, na.rm = T))
 ```
+
+***
+## select()
 
 De esta forma conserva la línea que contiene la observación, sólo la ignora a la hora de calcular el promedio.\
 
@@ -231,12 +274,20 @@ datos_clean %>%
   select(especie, num_hojas, num_frutos)
 ```
 
+
+***
+## selecionar multiples variables
+
 La selección de varias variables puede llevarse acabo como en el código anterior entrando el nombre de las variables de interés a mano, o puede seleccionar desde la variable *x* hasta la variable *y* utilizando los dos puntos (*:*):
 
 ```{r}
 datos_clean %>% 
   select(genero:huesped)
 ```
+
+
+***
+## Filtar con "!"
 
 O puede seleccionar todas las variables menos las variables especificadas. En este caso, la variable *huesped* no es importante para la investigación, así que se puede seleccionar todas las variables menos esta utilizando el signo de exclamación (*!*) como lo hicimos anteriormente con la función`filter()`:
 
