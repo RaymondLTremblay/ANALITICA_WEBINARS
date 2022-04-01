@@ -1,5 +1,5 @@
 ---
-title: "Metodos_estadisticos_robustos"
+title: ""
 output:
   html_document:
     css: ANALITICA_WEB.css
@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ***
 
-# Introducción a Meetodos Estadisticos Robustos
+# Introducción a Métodos Estadísticos Robustos
 
 - Dia del Taller: el 10 de marzo, 2022
 - Recurso: Ricardo Morenna, PhD
@@ -38,7 +38,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Video de la Presentación
 
-# Enlaces para acceso a los Videos en el Canal de YOUTUBE ANALITICA Fundación
+## YOUTUBE ANALITICA Fundación
+
+ - Enlaces para acceso a los Videos
 
 Los sigientes enlaces corresponde a la presentación abajo
 
