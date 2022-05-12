@@ -50,7 +50,8 @@ calendario=tribble(
   "13 de enero", 2022, "Introducción a Machine Learning", "Jeffrey Chan, Estudiante graduado",
   "10 de febrero", 2022, "Ecuaciones Estructurales", "Ernesto Rosario Hernández, PhD",
   "10 de marzo", 2022, "Métodos estadísticos robustos", "Ricardo Morenna, PhD",
-  "14 de abril", 2022, "Regresiones beta", "Raymond L. Tremblay, PhD"
+  "14 de abril", 2022, "Regresiones beta", "Raymond L. Tremblay, PhD",
+  "12 de  mayo", 2022, "Arte Generativo: El código como medio creativo", "Elio Ramos, PhD"
 )
 gt(calendario)
 ```
